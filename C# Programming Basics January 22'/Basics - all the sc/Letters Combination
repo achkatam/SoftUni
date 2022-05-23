@@ -1,0 +1,31 @@
+using System;
+
+namespace Letters_Combination
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            char startLetter = char.Parse(Console.ReadLine().ToLower());
+            char endLetter = char.Parse(Console.ReadLine().ToLower());
+            char skipLetter = char.Parse(Console.ReadLine().ToLower());
+
+            int lettersCnt = 0;
+            for (char i = startLetter; i <= endLetter; i++)
+            {
+                for (char j = startLetter; j <= endLetter; j++)
+                {
+                    for (int k = startLetter; k <= endLetter; k++)
+                    {
+                        if (i !=skipLetter && j != skipLetter && k != skipLetter)
+                        {
+                            lettersCnt++;
+                            Console.Write($"{(char)(i)}{(char)(j)}{(char)(k)} ");
+                        }
+                    }
+                }
+            }
+                Console.Write($"{lettersCnt}");
+        }
+    }
+}

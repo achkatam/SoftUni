@@ -1,0 +1,33 @@
+using System;
+
+namespace Sample_For_Array
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string name01 = "Daniel";
+            string name02 = "John";
+            string name03 = "Jane";
+            string name04 = "Tobi";
+
+            Console.WriteLine(name01);
+
+            //absolutely the same as the following code: 
+
+            string[] names = new string[4];
+            names[0] = "Daniel";
+            names[1] = "John";
+            names[2] = "Jane";
+            names[3] = "Tobi";
+
+            Console.WriteLine(names[0]);
+
+            //absolutely the same as the following code:
+            string[] names01 = new string[4] { "Daniel", "John", "Jane", "Tobi" };
+
+            Console.WriteLine(names01[0]);
+
+        }
+    }
+}

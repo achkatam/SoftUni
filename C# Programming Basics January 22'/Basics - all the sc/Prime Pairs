@@ -1,0 +1,60 @@
+using System;
+
+namespace Prime_Pairs_vol._2
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            //Напишете програма, която генерира и принтира на конзолата четирицифрени числа, в които първата и втората двойка цифри образуват двуцифрени прости числа(пример за такова число 1723).Крайната стойност до която трябва да се генерират двойките се определя от други 2 цифри, подадени като вход, които определят с колко крайната стойност е по-голяма от началната.
+            //Вход
+            //От конзолата се четат четири реда:
+            //•	На първия ред – началната стойност на първите първата двойка числа – цяло положително число в диапазона[10… 90]
+            //•	На втория ред – началната стойност на втората двойка числа – цяло положително число в диапазона[10… 90]
+            //•	На третия ред – разликата между началната и крайната стойност на първата двойка числа – цяло положително число в диапазона[1… 9]
+            //•	На четвъртия ред – разликата между началната и крайната стойност на втората двойка числа – цяло положително число в диапазона[1… 9]
+            //Изход:
+            //Да се отпечатат на конзолата четирицифрените числа, в които първите две и вторите две цифри са прости двуцифрени числа.
+
+            int startValue1 = int.Parse(Console.ReadLine());
+            int startValue2 = int.Parse(Console.ReadLine());
+
+            int diff1 = int.Parse(Console.ReadLine());
+            int diff2 = int.Parse(Console.ReadLine());
+
+            int end1 = startValue1 + diff1;
+            int end2 = startValue2 + diff2;
+
+            for (int i = startValue1; i <= end1; i++)
+            {
+                for (int j = startValue2; j <= end2; j++)
+                {
+                    //How to check if a number is a prime number..
+                    bool isPrime1 = true;
+                    bool isPrime2 = true;
+
+                    for (int k = 2; k <= i/2; k++)
+                    {
+                        if (i % k == 0)
+                        {
+                            isPrime1 = false; // it's a composite num
+                            break;
+                        }
+                    }
+                    for (int l = 2; l <= j/2; l++)
+                    {
+                        if (j % l == 0)
+                        {
+                            isPrime2 = false;
+                            break; //it's a composite num as well
+                        }
+                    }
+                    if (isPrime1 && isPrime2)
+                    {
+                        Console.WriteLine("{0}{1}", i, j);
+                    }
+                }
+            }
+        }
+    }
+}

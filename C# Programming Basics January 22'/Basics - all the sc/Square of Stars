@@ -1,0 +1,22 @@
+using System;
+
+namespace _03._Square_of_Stars
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int n = int.Parse(Console.ReadLine());
+
+            for (int row = 1; row <= n; row++)
+            {
+                Console.Write("*");
+                for (int column = 1; column < n; column++)
+                {
+                    Console.Write(" *");
+                }
+                Console.WriteLine();
+            }
+        }
+    }
+}

@@ -1,0 +1,47 @@
+using System;
+
+namespace cuk_cuk_uck
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            //string[] dayOfWeek =
+            //{
+            //    "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" ,"Sunday"
+            //};
+
+            //int inputNum = int.Parse(Console.ReadLine());
+
+            //if (inputNum < 1 || inputNum > dayOfWeek.Length)
+            //{
+            //    Console.WriteLine("Invalid day!");
+            //}
+            //else
+            //{
+            //    Console.WriteLine(dayOfWeek[inputNum -1]);
+            //}
+
+            string[] dayOfWeek = new string[7];
+
+            dayOfWeek[0] = "Monday";
+            dayOfWeek[1] = "Tuesday";
+            dayOfWeek[2] = "Wednesday";
+            dayOfWeek[3] = "Thursday";
+            dayOfWeek[4] = "Friday";
+            dayOfWeek[5] = "Saturday";
+            dayOfWeek[6] = "Sunday";
+
+            int inputNum = int.Parse(Console.ReadLine());
+            if (inputNum <1 || inputNum > dayOfWeek.Length)
+            {
+                Console.WriteLine($"Invalid day!");
+            }
+            else
+            {
+                Console.WriteLine(dayOfWeek[inputNum-1]);
+            }
+
+        }
+    }
+}

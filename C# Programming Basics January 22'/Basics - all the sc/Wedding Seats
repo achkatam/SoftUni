@@ -1,0 +1,51 @@
+using System;
+
+namespace Wedding_Seats
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            char startSector = 'A';
+            char startSeat = 'a';
+
+            char endSector = char.Parse(Console.ReadLine().ToUpper());
+
+            int seatsCntFirstSector = int.Parse(Console.ReadLine());
+            int oddSeats = int.Parse(Console.ReadLine());
+
+            int counterSeats = 0;
+            int totalSeats = 0;
+
+            for (char i = startSector; i <= endSector; i++)
+            {
+                for (int j = 1; j <= seatsCntFirstSector; j++)
+                {
+                    if (j % 2 == 0)
+                    {
+                        counterSeats = oddSeats + 2;
+                    }
+                    else
+                    {
+                        counterSeats = oddSeats;
+                    }
+                    totalSeats += counterSeats;
+
+                    for (char k = startSeat; k <= 'z'; k++)
+                    {
+                        if (counterSeats == 0)
+                        {
+                            break;
+                        }
+                        counterSeats--;
+
+                        Console.WriteLine($"{i}{j}{k}");
+                    }
+
+                }
+                seatsCntFirstSector++;
+            }
+            Console.WriteLine(totalSeats);
+        }
+    }
+}

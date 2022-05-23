@@ -1,0 +1,50 @@
+using System;
+
+namespace Happy_Car_Parking
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            //Деси трябва да заведе котката си на ветеринар в клиниката "Happy Cat", но паркингът се заплаща. Напишете програма, която пресмята колко общо трябва да се плати за престоя на колата на Деси на паркинга, за да заведе котката си на ветеринар.Паркингът е различен от останалите и има разнообразен ценоразпис.За всеки четен ден и нечетен час, паркингът таксува 2.50 лева.Във всеки нечетен ден и четен час таксата е 1.25 лева, във всички останали случаи се заплаща 1 лев.Таксуването става на всеки изминал час от деня. Всеки един от изходите трябва да бъде закръглен до втория знак след десетичната запетая.
+            //Вход
+            //От конзолата се четат два реда:
+            //•	Брой дни – цяло число в интервала[1 … 5]
+            //•	Брой часове за всеки един от дните - цяло число в интервала[1 … 24]
+
+            int daysCnt = int.Parse(Console.ReadLine());
+            int hoursCnt = int.Parse(Console.ReadLine());
+
+            double parkingPrice = 0;  // Parking price per hour
+            double parkingPricePerDay = 0;
+            double totalPrice = 0; // totalPrice += parkingPricePerDay;
+
+            for (int i = 1; i <= daysCnt; i++)
+            {
+                for (int j = 1; j <= hoursCnt; j++)
+                {
+                    if (i % 2 == 0 && j % 2 != 0)
+                    {
+                        parkingPrice = 2.50;
+                    }
+                    else if (i % 2 != 0 && j % 2 == 0)
+                    {
+                        parkingPrice = 1.25;
+                    }
+                    else
+                    {
+                        parkingPrice = 1;
+                    }
+                    parkingPricePerDay += parkingPrice;
+                }
+                Console.WriteLine($"Day: {i} - {parkingPricePerDay:f2} leva");
+
+                totalPrice += parkingPricePerDay;
+
+                parkingPricePerDay = 0;
+            }
+            Console.WriteLine($"Total: {totalPrice:f2} leva");
+            //За всеки четен ден и нечетен час, паркингът таксува 2.50 лева.Във всеки нечетен ден и четен час таксата е 1.25 лева, във всички останали случаи се заплаща 1 лев.
+        }
+    }
+}
