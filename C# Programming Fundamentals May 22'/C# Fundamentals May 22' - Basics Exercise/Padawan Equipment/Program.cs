@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 
 namespace Padawan_Equipment
 {
@@ -23,13 +23,13 @@ namespace Padawan_Equipment
 
             double totalPrice = finalBeltPrice + finalRobePrice + finalSaberPrice;
 
-            if(budget >= totalPrice)
+            if (budget >= totalPrice)
             {
                 Console.WriteLine($"The money is enough - it would cost {totalPrice:f2}lv.");
             }
             else
             {
-                Console.WriteLine($"John will need {Math.Abs(budget-totalPrice):f2}lv more.");
+                Console.WriteLine($"John will need {Math.Abs(budget - totalPrice):f2}lv more.");
             }
 
 

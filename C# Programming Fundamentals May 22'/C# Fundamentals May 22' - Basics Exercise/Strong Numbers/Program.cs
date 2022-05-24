@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 
 namespace Strong_Numbers
 {
@@ -19,8 +19,8 @@ namespace Strong_Numbers
             while (strongNumber > 0)
             {
                 int factorialNum = 1;
-                int currentNum = strongNumber % 10; // gives u the last digit of the number
-                strongNumber /= 10; 
+                int currentNum = strongNumber % 10;
+                strongNumber /= 10;
 
                 for (int i = 2; i < currentNum; i++)
                 {
