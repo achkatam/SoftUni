@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 
 namespace Multiplication_Table_2._0
 {
@@ -21,7 +21,10 @@ namespace Multiplication_Table_2._0
                 times++;
             }
             while (times <= 10);
-            
+
+
+
+
         }
     }
 }

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 
 namespace _10._Multiplication_Table
 {
