@@ -31,6 +31,11 @@ namespace _11._Refactor_Volume_of_Pyramid
             double volume = (lenght * width * height) / 3;
             Console.WriteLine($"Pyramid Volume: {volume:f2}");
 
+            /*Explanation of that what was refactored:
+             * the variables dul, sh, V were renamed to lenght, width, height and variable double volume was added.
+             * Also math operation addition was changed to multiplication, so the formula was incorrect at the beggining.
+             */
+
         }
     }
 }
