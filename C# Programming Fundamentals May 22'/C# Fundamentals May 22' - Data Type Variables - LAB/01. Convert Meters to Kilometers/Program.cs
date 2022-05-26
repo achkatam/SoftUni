@@ -12,8 +12,17 @@ namespace _01._Convert_Meters_to_Kilometers
             int meters = int.Parse(Console.ReadLine());
 
             double km = meters * 0.001;
-
+            //output
             Console.WriteLine($"{(km):f2}");
+
+            //another solution 
+
+            //int meters = int.Parse(Console.ReadLine());
+
+            //double kilometers = meters / 1000d;
+
+            //Console.WriteLine($"{kilometers:f2}");
+
 
 
         }
