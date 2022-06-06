@@ -8,25 +8,60 @@ namespace Encrypt__Sort_And_Print_Array
     {
         static void Main(string[] args)
         {
-            //Using Lists of vowels and consonants
-            //List<char> vowels = new List<char>
-            //{
-            //    'a', 'A',
-            //        'e', 'E',
-            //        'i', 'I',
-            //        'o', 'O',
-            //        'u', 'U'
-            //};
+            //Write a program that reads a sequence of strings from the console. Encrypt every string by summing:
+            //•	The code of each vowel multiplied by the string length
+            //•	The code of each consonant divided by the string length
+            //Sort the number sequence in ascending order and print it on the console.
 
-            //List<char> consonants = new List<char>
-            //{
-            //     'B','b','C','c','d','D','F','f','G','g','H','h','J','j','K','k','L','l','M','m','N','n','P','p',
-            // 'Q','q','R','r','S','s','T','t','V','v','W','w','X','x','Y','y','z','Z'
-            //};
+            //Start with creating lists for vowels and consonant letter/chars
+            List<char> vowel = new List<char>
+            {
+                'a', 'A',
+                'e', 'E',
+                'i', 'I',
+                'o', 'O',
+                'u', 'U'
+            };
 
-            //int n = int.Parse(Console.ReadLine());
-            //double[] sumOfChars = new double[n];
+            int n = int.Parse(Console.ReadLine());
+            double[] sumOfChars = new double[n];
 
+            //Let's create for loop and add names
+            for (int i = 0; i < n; i++)
+            {
+                string name = Console.ReadLine();
+                int sum = 0;
+                //One more for loop to check if the name's characters are vowels or consonants
+                for (int j = 0; j < name.Length; j++)
+                {
+                    if (vowel.Contains(name[j]))
+                    {
+                        sum += name[j] * name.Length;
+                    }
+                    else
+                    {
+                        sum += name[j] / name.Length;
+                    }
+                }
+                //Sum up all the chars
+                sumOfChars[i] = sum;
+            }
+            //Put sumOfChars into a list:
+            var listOfSums = sumOfChars.ToList();
+            //Order listOfSums by ascending order - by default
+            var ascendingOrder = listOfSums.OrderBy(x => x);//This orders the array to ascending order by default
+
+            //Output
+            foreach (var chars in ascendingOrder)
+            {
+                Console.WriteLine(chars);
+            }
+            //Second solution
+            //Declare variables and arrays
+            //int n = int.Parse(Console.ReadLine()); // the end the for loop
+            //int[] numbers = new int[n]; // the length of the array will be n - symbols
+
+            ////Solution
             //for (int i = 0; i < n; i++)
             //{
             //    string name = Console.ReadLine();
@@ -34,76 +69,34 @@ namespace Encrypt__Sort_And_Print_Array
 
             //    for (int j = 0; j < name.Length; j++)
             //    {
-
-            //        if (vowels.Contains(name[j]))
+            //        char ch = name[j];
+            //        switch (ch)
             //        {
-            //            sum += (name[j] * name.Length);
-            //        }
-            //        else if (consonants.Contains(name[j]))
-            //        {
-            //            sum += (name[j] / name.Length);
+            //            case 'a':
+            //            case 'A':
+            //            case 'e':
+            //            case 'E':
+            //            case 'i':
+            //            case 'I':
+            //            case 'o':
+            //            case 'O':
+            //            case 'u':
+            //            case 'U':
+            //                sum += ch * name.Length;
+            //                break;
+            //            default:
+            //                sum += ch / name.Length;
+            //                break;
             //        }
             //    }
-            //    //Sum up the chars
-            //    sumOfChars[i] = sum;
+            //    numbers[i] = sum;
             //}
-            //// Use var - it's more flexible instead of List<double> listOfSum = new List<double>();
-            //var listOfSum = sumOfChars.ToList();
-            ////Gotta put boundaries of the list, you don't want to have zeros in your list, breaks
-            ////when dividing 
-            //var zerosRemoved = listOfSum.Where(x => x != 0);
-            //// Fix the order of the array - by default you want it be by ascending order
-            //var ascendingOrder = zerosRemoved.OrderBy(x => x);
+            //Array.Sort(numbers);
 
-            //// The output will be foreach loop so we represent the chars of the array as a sum of integers we calculated earlier
-            //foreach (var chars in ascendingOrder)
+            //foreach (var item in numbers)
             //{
-            //    Console.WriteLine(chars);
+            //    Console.WriteLine(item);
             //}
-            ////Judge gives 60/100
-
-            //Second solution
-            //Declare variables and arrays
-            int n = int.Parse(Console.ReadLine()); // the end the for loop
-            int[] numbers = new int[n]; // the length of the array will be n - symbols
-
-            //Solution
-            for (int i = 0; i < n; i++)
-            {
-                string name = Console.ReadLine();
-                int sum = 0;
-
-                for (int j = 0; j < name.Length; j++)
-                {
-                    char ch = name[j];
-                    switch (ch)
-                    {
-                        case 'a':
-                        case 'A':
-                        case 'e':
-                        case 'E':
-                        case 'i':
-                        case 'I':
-                        case 'o':
-                        case 'O':
-                        case 'u':
-                        case 'U':
-                            sum += ch * name.Length;
-                            break;
-                        default:
-                            sum += ch / name.Length;
-                            break;
-                    }
-                }
-                numbers[i] = sum;
-            }
-            Array.Sort(numbers);
-
-            foreach (var item in numbers)
-            {
-                Console.WriteLine(item);
-            }
-
         }
     }
 }
