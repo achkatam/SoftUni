@@ -26,6 +26,8 @@ namespace _5._Multiplication_Sign
 
             //boolean for zero
             bool isZero = false;
+            //boolean for negative
+            bool isNegative = false;
 
             //Check with for loop
             for (int i = 0; i < numbers.Length; i++)
@@ -33,22 +35,26 @@ namespace _5._Multiplication_Sign
                 if (numbers[i] < 0) negativeCnt++;
                 if (numbers[i] == 0) isZero = true;
             }
-            if (negativeCnt == 2)
+
+
+            if (negativeCnt == 1 || negativeCnt == 3)
             {
-                product = "positive";
+                isNegative = true;
             }
-            else if (!isZero && negativeCnt != 2 && negativeCnt != 0)
-            {
-                product = "negative";
-            }
-            else if (isZero)
+            //
+            if (isZero)
             {
                 product = "zero";
+            }
+            else if (isNegative)
+            {
+                product = "negative";
             }
             else
             {
                 product = "positive";
             }
+
 
             return product;
         }
