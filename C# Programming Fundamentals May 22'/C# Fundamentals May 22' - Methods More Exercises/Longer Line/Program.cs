@@ -38,5 +38,6 @@ namespace Center_Point
                 Console.WriteLine($"({x1}, {y1})");
             }
         }
+        //This will be fixed soon
     }
 }
