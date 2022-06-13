@@ -6,23 +6,27 @@ namespace _7._NxN_Matrix
     {
         static void Main(string[] args)
         {
-            //input number
-            int inputNum = int.Parse(Console.ReadLine());
-            MatrixCreator(inputNum);
+            // Create a method that receives a single integer n and prints an NxN matrix using this number as a filler.
 
+            //input
+            int num = int.Parse(Console.ReadLine());
+
+            //Output
+            Matrix(num);
         }
-
-        private static void MatrixCreator(int inputNum)
+        static void Matrix(int number)
         {
-            for (int rows = 0; rows < inputNum; rows++)
+            //Create for loop to make the matrix
+            //For loop for rows
+            for (int row = 0; row < number; row++)
             {
-                for (int cols = 0; cols < inputNum; cols++)
+                //For loop for columns
+                for (int col = 0; col < number; col++)
                 {
-                    Console.Write(inputNum + " ");
+                    Console.Write($"{number} ");
                 }
-                Console.WriteLine();//Brings to the next row
+                Console.WriteLine();
             }
-            Console.WriteLine();
         }
     }
 }
