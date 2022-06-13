@@ -6,27 +6,35 @@ namespace Factorial_Division
     {
         static void Main(string[] args)
         {
+            //Read two integers.Calculate the factorial of each number. Divide the first result by the second and print the result of the division formatted to the second decimal point.
+
             //input
             int firstNum = int.Parse(Console.ReadLine());
             int secondNum = int.Parse(Console.ReadLine());
 
-            double result =Factorial(firstNum);
-            double result2 = Factorial(secondNum);
-            PrintResult(result, result2);
+            //variables for the factorials of the two nums
+            double result = FactorialNum(firstNum);
+            double result2 = FactorialNum(secondNum);
+
+            //Output printing
+            PrintTheResult(result, result2);
+
+        }
+        static void PrintTheResult(double result, double result2)
+        {
+            Console.WriteLine($"{result / result2:f2}");
         }
 
-        private static void PrintResult(double result, double result2)
+        static double FactorialNum(int num)
         {
-            Console.WriteLine($"{result/ result2:f2}");
-        }
+            //Only 1 method is enough for 2 nums, this gives us just the formula.
+            //Mind that th factorials always start from 1
+            double result = 1;
 
-        private static double Factorial(int number)
-        {
-            double result = 1;//Factorials always start from 1
-            while (number!=1)
+            while (num != 1)
             {
-                result *= number;
-                number--;
+                result *= num;
+                num--;
             }
             return result;
         }
