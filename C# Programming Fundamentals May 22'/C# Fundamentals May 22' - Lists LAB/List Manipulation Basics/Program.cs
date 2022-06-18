@@ -2,49 +2,77 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace _06.ListManipulationBasics
+namespace List_Manipulation_Basics
 {
-    internal class Program
+    class Program
     {
         static void Main(string[] args)
         {
-            List<int> numbers = Console.ReadLine().Split().Select(int.Parse).ToList();
 
-            while (true)
+            //Create a program that reads a list of integers.Then until you receive "end", you will receive different commands:
+
+            //Note: All the indices will be valid!
+            //When you receive the "end" command, print the final state of the list(separated by spaces).
+
+            //Initialize the list of integers
+            var numbers = Console.ReadLine().Split().Select(int.Parse).ToList();
+
+            //command
+            string command = Console.ReadLine();
+            //while until end
+            while (command != "end")
             {
-                string command = Console.ReadLine();
-
-                if (command == "end")
-                {
-                    break;
-                }
-
+                //Initialize array of tokens represnting the inputed commands
                 string[] tokens = command.Split();
-                string action = tokens[0];
+                //easier operating
+                string cmd = tokens[0];
 
-                switch (action)
+                switch (cmd)
                 {
+                    //•	Add { number}: add a number to the end of the list.
                     case "Add":
-                        int numberToAdd = int.Parse(tokens[1]);
-                        numbers.Add(numberToAdd);
+                        int num = int.Parse(tokens[1]);
+                        Add(num, numbers);
                         break;
+                    //•	Remove { number}: remove a number from the list
                     case "Remove":
-                        int numberToRemove = int.Parse(tokens[1]);
-                        numbers.Remove(numberToRemove);
+                        Remove(int.Parse(tokens[1]), numbers);
                         break;
+                    //•	RemoveAt { index}: remove a number at a given index
                     case "RemoveAt":
-                        int indexToRemoveAt = int.Parse(tokens[1]);
-                        numbers.RemoveAt(indexToRemoveAt);
+                        int index = int.Parse(tokens[1]);
+                        RemoveAt(index, numbers);
                         break;
+                    // Insert {number} { index}: insert a number at a given index.
                     case "Insert":
-                        int numberToInsert = int.Parse(tokens[1]);
-                        int indexToInsertAt = int.Parse(tokens[2]);
-                        numbers.Insert(indexToInsertAt, numberToInsert);
+                        int numToInsert = int.Parse(tokens[2]);
+                        int indexToInsert = int.Parse(tokens[1]);
+                        Insert(numToInsert, indexToInsert, numbers);
                         break;
                 }
+                command = Console.ReadLine();
             }
+            Console.WriteLine(string.Join(' ', numbers));
+        }
 
-            Console.WriteLine(string.Join(" ", numbers));
+        private static void Insert(int num, int index, List<int> numbers)
+        {
+            numbers.Insert(num, index);
+        }
+
+        private static void RemoveAt(int index, List<int> numbers)
+        {
+            numbers.RemoveAt(index);
+        }
+
+        private static void Remove(int num, List<int> numbers)
+        {
+            numbers.Remove(num);
+        }
+
+        private static void Add(int num, List<int> numbers)
+        {
+            numbers.Add(num);
         }
     }
 }
