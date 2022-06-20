@@ -12,33 +12,33 @@ namespace Bomb_Numbers
 
             //Create the list of numbers
             var numbers = Console.ReadLine().Split().Select(int.Parse).ToList();
+            //Array of special numbers.. 
+            int[] specialNum = Console.ReadLine().Split().Select(int.Parse).ToArray();
+            //special bomb number holding a certain power
+            int bombNum = (specialNum[0]);
+            int power = specialNum[1];
 
-            //add-ons
-            int[] tokens = Console.ReadLine().Split().Select(int.Parse).ToArray();
-            int bombNum = tokens[0];
-            int power = tokens[1];
+            //For loops to iterate through the list
 
-            //For loop to iterate
             for (int i = 0; i < numbers.Count; i++)
             {
-                int target = numbers[i];
-                if (target == bombNum)
+                int currNum = numbers[i];
+                if (currNum == bombNum)
                 {
-                    BombNumber(numbers, power, i);
+                    //Initialize startIndex and endIndex
+                    int startIndex = i - power;
+                    int endIndex = i + power;
+                    //Always keep the index in the arrays bounds
+                    if (startIndex < 0) startIndex = 0;
+                    if (endIndex > numbers.Count - 1) endIndex = numbers.Count - 1;
+
+                    int numToBeRemoved = endIndex - startIndex + 1;
+                    numbers.RemoveRange(startIndex, numToBeRemoved);
+                    i = startIndex - 1;
                 }
             }
-            //Sum them up as an output
-            Console.WriteLine(numbers.Sum()); ;
-        }
-
-        private static void BombNumber(List<int> numbers, int power, int index)
-        {
-            int start = Math.Max(0, index - power);//goes to the left
-            int end = Math.Min(numbers.Count - 1, index + power);//goes to the right
-            for (int i = start; i <= end; i++)
-            {
-                numbers[i] = 0;
-            }
+            //Finally, print the sum of the remaining elements in the sequence.
+            Console.WriteLine(numbers.Sum());
         }
     }
 }
