@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace _04._Students
 {
@@ -7,50 +8,57 @@ namespace _04._Students
     {
         static void Main(string[] args)
         {
+
             //Define a class called Student, which will hold the following information about some students: 
             //•	first name
             //•	last name
             //•	age
             //•	home town
+            //Input / Constraints
+            //Read information about some students until you receive the "end" command
 
+            //Create a list to store students data
             List<Student> students = new List<Student>();
 
             string command = Console.ReadLine();
 
-            while (command != "end")
+            while (command!="end")
             {
-                string[] studentProperties = command.Split();
+                string[] tokens = command.Split();
                 Student student = new Student
                 {
-                    FirstName = studentProperties[0],
-                    LastName = studentProperties[1],
-                    Age = int.Parse(studentProperties[2]),
-                    HomeTown = studentProperties[3]
+                    FirstName = tokens[0],
+                    LastName = tokens[1],
+                    Age = int.Parse(tokens[2]),
+                    HomeTown = tokens[3]
                 };
 
                 students.Add(student);
 
                 command = Console.ReadLine();
             }
+            //.After that, you will receive a city name.
+            string city = Console.ReadLine();
 
-            string cityName = Console.ReadLine();
+            //Print the students who are from the given city in the following format: "{firstName} {lastName} is {age} years old."
 
-            foreach (Student student in students)
+            //Output using LINQ and foreach
+            //Create new list of filteredStudents
+            List<Student> filteredStudents = students.Where(c => c.HomeTown == city).ToList();
+
+            //foreach
+            foreach (var student in filteredStudents)
             {
-                if (student.HomeTown == cityName)
-                {
-                    Console.WriteLine($"{student.FirstName} {student.LastName} is {student.Age} years old.");
-                }
+                Console.WriteLine($"{student.FirstName} {student.LastName} is {student.Age} years old.");
             }
-
+            
         }
-        class Student
-        {
-            public string FirstName { get; set; }
-            public string LastName { get; set; }
-            public int Age { get; set; }
-            public string HomeTown { get; set; }
-
-        }
+    }
+    class Student
+    {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public int Age { get; set; }
+        public string HomeTown { get; set; }
     }
 }
