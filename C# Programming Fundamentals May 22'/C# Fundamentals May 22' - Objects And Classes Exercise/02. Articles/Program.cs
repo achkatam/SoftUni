@@ -44,10 +44,7 @@ namespace _02._Articles
             Content = content;
             Author = author;
         }
-        public Article()
-        {
-
-        }
+        
         public string Title { get; set; }
         public string Content { get; set; }
         public string Author { get; set; }
