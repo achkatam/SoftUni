@@ -2,64 +2,66 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace _04._Students
+namespace _05._Students_2._0
 {
     class Program
     {
-
         static void Main(string[] args)
         {
-
             //Define a class called Student, which will hold the following information about some students: 
             //•	first name
             //•	last name
             //•	age
             //•	home town
             //Input / Constraints
-            //Read information about some students until you receive the "end" command
 
-            //Create a list to store students data
+            //Create List<Student> of sudents so we can stack them up in there
             List<Student> students = new List<Student>();
 
-            string command = Console.ReadLine();
-
-            while (command != "end")
+            //Read information about some students until you receive the "end" command
+            while (true)
             {
-                string[] tokens = command.Split();
+                string[] command = Console.ReadLine().Split();
+                if (command[0] == "end") break;
 
-                //Check if the student exist if not add to the list
-                if (IsStudentExisting(tokens[0], tokens[1], students))
+                //Check for existing student
+                if (IsExistingStudent(students, command[0], command[1]))
                 {
-                    Student student = students.Find(student => student.FirstName == tokens[0] && student.LastName == tokens[1]);
-                    student.Age = int.Parse(tokens[2]);
-                    student.HomeTown = tokens[3];
+                    //If exist just overwrite data
+                    var student = students.Find(student => student.FirstName == command[0] && student.LastName == command[1]);
+                    student.Age = int.Parse(command[2]);
+                    student.HomeTown = command[3];
                 }
                 else
                 {
-                    Student student = new Student(tokens[0], tokens[1], int.Parse(tokens[2]), tokens[3]);
-                    //Add the student to the LIst<Student> students
+                    //If doesn't exist create a new one and add to the list
+                    var student = new Student(command[0], command[1], int.Parse(command[2]), command[3]);
                     students.Add(student);
                 }
-                command = Console.ReadLine();
             }
-            //Finally, we have to overwrite the information.
-
+            //.After that, you will receive a city name.
             string city = Console.ReadLine();
-            List<Student> filteredStudents = students.Where(c => c.HomeTown == city).ToList();
 
-            foreach (var student in filteredStudents)
+            foreach (var student in students.Where(c => c.HomeTown == city))
             {
-                Console.WriteLine($"{student.FirstName} {student.LastName} is {student.Age} years old.");
+                Console.WriteLine(student);
             }
-
         }
 
-        public static bool IsStudentExisting(string firstName, string lastName, List<Student> students)
+        private static Student GetStudent(List<Student> students, string firstName, string lastName)
         {
-            foreach (var student in students)
+            Student existingStudent = null;
+
+            foreach (var student in students.Where(x => x.FirstName == firstName && x.LastName == lastName)) existingStudent = student;
+
+            return existingStudent;
+        }
+
+        private static bool IsExistingStudent(List<Student> students, string firstName, string lastName)
+        {
+            foreach (var student in students.Where(x => x.FirstName == firstName && x.LastName == lastName))
             {
-                if (student.FirstName == firstName && student.LastName == lastName) return true;
-                
+                return true;
             }
 
             return false;
@@ -67,18 +69,17 @@ namespace _04._Students
     }
     class Student
     {
-        
         public Student(string firstName, string lastName, int age, string homeTown)
         {
-            this.FirstName = firstName;
-            this.LastName = lastName;
-            this.Age = age;
-            this.HomeTown = homeTown;
+            FirstName = firstName;
+            LastName = lastName;
+            Age = age;
+            HomeTown = homeTown;
         }
-
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public int Age { get; set; }
         public string HomeTown { get; set; }
+        public override string ToString() => $"{FirstName} {LastName} is {Age} years old.";
     }
 }

@@ -10,28 +10,27 @@ namespace Randomize_Words
         {
             //You will be given a string that will contain words separated by a single space. Randomize their order and print each word on a new line.
 
-            //Create list with the words
-            var words = Console.ReadLine().Split().ToList();
+            //Create string array
+            string[] input = Console.ReadLine().Split();
 
-            Random rnd = new Random();
+            //Random method
+            Random random = new Random();
 
-            //Create for loop to iterate thru the list
-            for (int i = 0; i < words.Count; i++)
+            //For loop to iterate thru the array
+            for (int i = 0; i < input.Length; i++)
             {
-                //randomize
-                int randomIndex = rnd.Next(0, words.Count);
+                int randomIndex = random.Next(0, input.Length);
 
-                //variable for current words
-                string currWord = words[i];
+                string currWord = input[i];
 
-                words[i] = words[randomIndex];
-                words[randomIndex] = currWord;
-
+                input[i] = input[randomIndex];
+                input[randomIndex] = currWord;
             }
-            //Foreach to check each word in words
-            foreach (var word in words)
+
+            //Foreach to check each word
+            foreach (var word in input)
             {
-                Console.WriteLine(word) ;
+                Console.WriteLine(word);
             }
 
         }

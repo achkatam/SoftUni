@@ -10,46 +10,60 @@ namespace _06._Store_Boxes
         {
             //Define a class Item, which contains these properties: Name and Price.
             //Define a class Box, which contains these properties: Serial Number, Item, Item Quantity, and Price for a Box.
+            //The Price of one box has to be calculated: itemQuantity* itemPrice.
+
+            //Start with creating List of boxes
+            List<Box> boxes = new List<Box>();
             //Until you receive "end", you will be receiving data in the following format: "{Serial Number} {Item Name} {Item Quantity} {itemPrice}"
 
-            //Create new list for the Box(es)
-            List<Box> boxes = new List<Box>();
-
-            string command = Console.ReadLine();
-
-            while (command != "end")
+            while (true)
             {
-                string[] tokens = command.Split();
-                //Start creating new box and add it to the list of boxes
+                string[] cmds = Console.ReadLine().Split(' ', StringSplitOptions.RemoveEmptyEntries);
+
+                if (cmds[0] == "end") break;
+
+                //Create a new box which contains an item and add it to the list
                 Box box = new Box
                 {
-                    SerialNumber = int.Parse(tokens[0]),
-                    //Create new Item using constructor
-                    Item = new Item(tokens[1], decimal.Parse(tokens[3])),
-                    ItemQuantity = int.Parse(tokens[2])
+                    SerialNumber = int.Parse(cmds[0]),
+                    //create the item with name and price
+                    Item = new Item(cmds[1], decimal.Parse(cmds[3])),
+                    ItemQuantity = int.Parse(cmds[2])
                 };
-                //Add the created box in the list boxes
                 boxes.Add(box);
 
-                command = Console.ReadLine();
             }
             //Print all the boxes, ordered descending by price for a box, in the following format: 
+            //Order the list by descending price
+            boxes = boxes.OrderByDescending(x => x.BoxPrice).ToList();
+
+            //Output
+            foreach (var box in boxes)
+            {
+                Console.WriteLine($"{box.SerialNumber}");
+                Console.WriteLine($"-- { box.Item.Name} - ${ box.Item.Price:f2}: {box.ItemQuantity}");
+                Console.WriteLine($"-- ${ box.BoxPrice:f2}");
+            }
+
             //{ boxSerialNumber}
             //-- { boxItemName} – ${ boxItemPrice}: { boxItemQuantity}
             //-- ${ boxPrice}
             //The price should be formatted to the 2nd digit after the decimal separator.
 
-            //Create list of orederedBoxes by descending order
-            List<Box> orderedBoxes = boxes.OrderByDescending(p => p.BoxPrice).ToList();
 
-            //Foreach
-            foreach (var box in orderedBoxes)
+        }
+    }
+    class Box
+    {
+        public int SerialNumber { get; set; }
+        public Item Item { get; set; }
+        public int ItemQuantity { get; set; }
+        public decimal BoxPrice
+        {
+            get
             {
-                Console.WriteLine($"{box.SerialNumber}");
-                Console.WriteLine($"-- {box.Item.Name} - ${ box.Item.Price:f2}: { box.ItemQuantity}");
-                Console.WriteLine($"-- ${ box.BoxPrice:f2}");
+                return ItemQuantity * Item.Price;
             }
-
         }
     }
     class Item
@@ -61,20 +75,6 @@ namespace _06._Store_Boxes
         }
         public string Name { get; set; }
         public decimal Price { get; set; }
-    }
-    class Box
-    {
-        public int SerialNumber { get; set; }
-        public Item Item { get; set; }
-        public int ItemQuantity { get; set; }
 
-        public decimal BoxPrice
-        {
-            //The Price of one box has to be calculated: itemQuantity* itemPrice.
-            get
-            {
-                return this.ItemQuantity * this.Item.Price;
-            }
-        }
     }
 }

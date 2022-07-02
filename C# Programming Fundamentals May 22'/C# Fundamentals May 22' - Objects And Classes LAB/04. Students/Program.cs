@@ -8,57 +8,49 @@ namespace _04._Students
     {
         static void Main(string[] args)
         {
-
             //Define a class called Student, which will hold the following information about some students: 
             //•	first name
             //•	last name
             //•	age
             //•	home town
             //Input / Constraints
-            //Read information about some students until you receive the "end" command
 
-            //Create a list to store students data
+            //Create List<Student> of sudents so we can stack them up in there
             List<Student> students = new List<Student>();
 
-            string command = Console.ReadLine();
 
-            while (command!="end")
+            //Read information about some students until you receive the "end" command
+            while (true)
             {
-                string[] tokens = command.Split();
-                Student student = new Student
-                {
-                    FirstName = tokens[0],
-                    LastName = tokens[1],
-                    Age = int.Parse(tokens[2]),
-                    HomeTown = tokens[3]
-                };
-
+                string[] command = Console.ReadLine().Split();
+                if (command[0] == "end") break;
+                //Create a new student
+                var student = new Student(command[0], command[1], int.Parse(command[2]), command[3]);
+                //Add the student to the list 
                 students.Add(student);
-
-                command = Console.ReadLine();
             }
             //.After that, you will receive a city name.
             string city = Console.ReadLine();
 
-            //Print the students who are from the given city in the following format: "{firstName} {lastName} is {age} years old."
-
-            //Output using LINQ and foreach
-            //Create new list of filteredStudents
-            List<Student> filteredStudents = students.Where(c => c.HomeTown == city).ToList();
-
-            //foreach
-            foreach (var student in filteredStudents)
+            foreach (var student in students.Where(c => c.HomeTown == city))
             {
-                Console.WriteLine($"{student.FirstName} {student.LastName} is {student.Age} years old.");
+                Console.WriteLine(student);
             }
-            
         }
     }
     class Student
     {
+        public Student(string firstName, string lastName, int age, string homeTown)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+            Age = age;
+            HomeTown = homeTown;
+        }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public int Age { get; set; }
         public string HomeTown { get; set; }
+        public override string ToString() => $"{FirstName} {LastName} is {Age} years old.";
     }
 }

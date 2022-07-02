@@ -8,68 +8,56 @@ namespace _03._Songs
     {
         static void Main(string[] args)
         {
-            // Define a class called Song that will hold the following information about some songs:
+            //Define a class called Song that will hold the following information about some songs:
             //•	Type List
             //•	Name
             //•	Time
             //Input / Constraints
-
-            //Create list of songs
-            List<Song> songs = new List<Song>();
-
-
-            //•	On the first line, you will receive the number of songs - N.
+            //•	On the first line, you will receive the number of songs -N.
             int numOfSongs = int.Parse(Console.ReadLine());
 
-            //for loop to numsOfSongs
+            //List of songs
+            List<Song> songs = new List<Song>();
+
+            //For loop
             for (int i = 0; i < numOfSongs; i++)
             {
-                //•	On the next N lines, you will be receiving data in the following format:  "{typeList}_{name}_{time}"
-                string[] songProps = Console.ReadLine().Split('_');
+                //•	On the next N lines, you will be receiving data in the following format: "{typeList}_{name}_{time}"
+                string[] cmd = Console.ReadLine().Split("_");
 
-                Song song = new Song(songProps[0], songProps[1], songProps[2]);
 
-                //Add each created song to the list
+                //songType = cmd[0], songName= cmd[1], songDuration=cmd[2]
+                var song = new Song(cmd[0], cmd[1], cmd[2]);
+
+                //Add the song in the created list of songs
                 songs.Add(song);
             }
             //•	On the last line, you will receive Type List or "all".
             string typeList = Console.ReadLine();
 
-            //If you receive the "all" command, print out the names of all the songs.
-            if (typeList == "all")
-            {
-                foreach (var song in songs)
-                {
-                    Console.WriteLine(song.Name);
-                }
-            }
-            //If you receive Type List as an input on the last line, print out only the names of the songs which are from that Type List
+            //If you receive Type List as an input on the last line, print out only the names of the songs which are from that Type List. If you receive the "all" command, print out the names of all the songs.
+
+            if (typeList == "all") songs.ToList().ForEach(song => Console.WriteLine(song.Name));
             else
             {
                 foreach (var song in songs)
                 {
-                    if (song.TypeList == typeList)
-                    {
-                        Console.WriteLine(song.Name);
-                    }
+                    if (song.TypeList == typeList) Console.WriteLine(song.Name);
                 }
             }
-
         }
     }
     class Song
     {
-
-        //Create constructor of the Song
         public Song(string typeList, string name, string duration)
         {
-            this.TypeList = typeList;
-            this.Name = name;
-            this.Duration = duration;
+            TypeList = typeList;
+            Name = name;
+            Time = duration;
         }
-        //Create the properties
         public string TypeList { get; set; }
         public string Name { get; set; }
-        public string Duration { get; set; }
+        public string Time { get; set; }
+
     }
 }
