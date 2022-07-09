@@ -17,7 +17,7 @@ namespace SoftUni_Parking
             //After you execute all of the commands, print all of the currently registered users and their license plates in the format: 
             //•	"{username} => {licensePlateNumber}"
 
-            //Create dictionary for user and licensePlate (nums and letters) - string, string
+            //Create dictionary of user and licensePlate (nums and letters) - string, string
             var user = new Dictionary<string, string>();
 
             //count of users to register or unregister
