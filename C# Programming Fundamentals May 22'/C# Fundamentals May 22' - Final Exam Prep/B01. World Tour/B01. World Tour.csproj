@@ -3,7 +3,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
-    <RootNamespace>_01._Secret_Chat</RootNamespace>
+    <RootNamespace>B01._World_Tour</RootNamespace>
   </PropertyGroup>
 
 </Project>
