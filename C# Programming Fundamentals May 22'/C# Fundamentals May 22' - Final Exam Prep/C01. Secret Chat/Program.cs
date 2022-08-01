@@ -24,9 +24,7 @@ namespace C01._Secret_Chat
                 switch (cmd)
                 {
                     case "InsertSpace":
-                        //•	"InsertSpace:|:{index}":
-                        //o Inserts a single space at the given index.The given index will always be valid.
-                        message = message.Insert(int.Parse(tokens[1]), " ");
+                        message = InsertSpace(message, tokens);
                         break;
                     case "Reverse":
                         //•	"Reverse:|:{substring}":
@@ -49,9 +47,7 @@ namespace C01._Secret_Chat
                         }
                         break;
                     case "ChangeAll":
-                        //•	"ChangeAll:|:{substring}:|:{replacement}":
-                        //o Changes all occurrences of the given substring with the replacement text.
-                        message = message.Replace(tokens[1], tokens[2]);
+                        message = ChangeAll(message, tokens);
                         break;
                 }
                 Console.WriteLine(message);
@@ -60,6 +56,24 @@ namespace C01._Secret_Chat
             }
             //"You have a new text message: {message}"
             Console.WriteLine($"You have a new text message: {message}");
+        }
+
+        static string ChangeAll(string message, string[] tokens)
+        {
+            //•	"ChangeAll:|:{substring}:|:{replacement}":
+            //o Changes all occurrences of the given substring with the replacement text.
+            message = message.Replace(tokens[1], tokens[2]);
+
+            return message;
+        }
+
+        static string InsertSpace(string message, string[] tokens)
+        {
+            //•	"InsertSpace:|:{index}":
+            //o Inserts a single space at the given index.The given index will always be valid.
+            message = message.Insert(int.Parse(tokens[1]), " ");
+
+            return message;
         }
     }
 }

@@ -64,13 +64,12 @@ namespace _03._Heroes_of_Code_and_Logic_VII
             //HP: { current HP}
             //MP: { current MP}
 
-            PrintOutput(heroes);
-        }
-
-        public static void PrintOutput(Dictionary<string, Hero> heroes)
-        {
-            Console.WriteLine(string.Join("", heroes
-                .Select(x => $"{x.Key}\nHP: {x.Value.HP}\nMP: {x.Value.MP}\n")));
+            foreach (var hero in heroes)
+            {
+                Console.WriteLine($"{hero.Key}");
+                Console.WriteLine($"HP: {hero.Value.HP}");
+                Console.WriteLine($"MP: {hero.Value.MP}");
+            }
         }
 
         public static void Heal(Dictionary<string, Hero> heroes, string[] tokens, string name, int mAX_HP)

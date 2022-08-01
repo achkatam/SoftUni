@@ -24,7 +24,7 @@ namespace _02._Mirror_Words
             //"The mirror words are:
             //{ wordOne} <=> { wordtwo}, { wordOne} <=> { wordtwo}, … { wordOne} <=> { wordtwo}
 
-            string pattern = 
+            string pattern =
                 @"(\@{1,2}|\#{1,2})(?<word>[A-Za-z]{3,})\1\1(?<word2>[A-Za-z]{3,})\1";
 
             string input = Console.ReadLine();
