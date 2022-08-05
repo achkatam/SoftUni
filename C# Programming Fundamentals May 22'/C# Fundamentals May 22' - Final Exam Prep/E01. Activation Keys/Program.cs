@@ -41,16 +41,22 @@ namespace E01._Activation_Keys
                             int endIndex = int.Parse(tokens[3]);
                             string substring = input.Substring(startIndex, endIndex - startIndex);
 
-                            if (tokens[1] == "Upper")
-                            {
-                                input = input.Replace(substring, substring.ToUpper());
+                            string casing = tokens[1];
 
-                            }
-                            else if (tokens[1] == "Lower")
+                            input = casing switch
                             {
-                                input = input.Replace(substring, substring.ToLower());
-                            }
-
+                                "Upper" =>  input.Replace(substring, substring.ToUpper()),
+                                "Lower" => input.Replace(substring,substring.ToLower()),
+                                _ => input
+                            };
+                            //if (tokens[1] == "Upper")
+                            //{
+                            //    input = input.Replace(substring, substring.ToUpper());
+                            //}
+                            //else if (tokens[1] == "Lower")
+                            //{
+                            //    input = input.Replace(substring, substring.ToLower());
+                            //}
                             Console.WriteLine(input);
                         }
                         break;
