@@ -33,7 +33,7 @@ namespace _04._Fast_Food
             //Print the largest order
             Console.WriteLine(orders.Max());
 
-            //if orders <0 it will break or the totalFood < orders.Peek()
+            //if orders < 0 it will break 
             while (orders.Count > 0)
             {
                 if (totalFood >= orders.Peek())
