@@ -1,62 +1,79 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Runtime.CompilerServices;
 
-namespace _04._Product_Shop
+namespace ProductShop
 {
-    class Program
+    internal class Program
     {
         static void Main(string[] args)
         {
-            //Create a program that prints information about food shops in Sofia and the products they store. Until the "Revision" command is received, you will be receiving input in the format: "{shop}, {product}, {price}".  Keep in mind that if you receive a shop you already have received, you must collect its product information.
-            //Your output must be ordered by shop name and must be in the format:
-            //"{shop}->
-            //Product: { product}, Price: { price}
-            //            "
-            //Note: The price should not be rounded or formatted.
-
-            var stores = new Dictionary<string, Dictionary<string, double>>();
-
-
+            var stores = new Dictionary<string, List<Product>>();
 
             string command = Console.ReadLine();
 
             while (command != "Revision")
             {
-                var tokens = command
-                .Split(", ", StringSplitOptions.RemoveEmptyEntries)
-                .ToArray();
-                string store = tokens[0];
-                string product = tokens[1];
-                double price = double.Parse(tokens[2]);
+                var tokens = command.Split(", "
+                    , StringSplitOptions.RemoveEmptyEntries);
+
+                var store = tokens[0];
+                var product = tokens[1];
+                var price = double.Parse(tokens[2]);
 
                 AddStore(stores, store, product, price);
+
 
                 command = Console.ReadLine();
             }
 
+            PrintOutput(stores);
+
+            //fantastico->
+            //Product: apple, Price: 1.2
+            //Product: grape, Price: 2.2
+            //kaufland->
+            //Product: banana, Price: 1.1
+            //lidl->
+            //Product: juice, Price: 2.3
+
+
+        }
+
+        static void PrintOutput(Dictionary<string, List<Product>> stores)
+        {
             foreach (var store in stores.OrderBy(x => x.Key))
             {
                 Console.WriteLine($"{store.Key}->");
 
                 foreach (var item in store.Value)
                 {
-                    Console.WriteLine($"Product: {item.Key}, Price: {item.Value}");
+                    Console.WriteLine(item);
                 }
             }
-
         }
 
-        static void AddStore(Dictionary<string, Dictionary<string, double>> stores, string store, string product, double price)
+        static void AddStore(Dictionary<string, List<Product>> stores, string store, string product, double price)
         {
             if (!stores.ContainsKey(store))
             {
-                stores.Add(store, new Dictionary<string, double>());
+                stores.Add(store, new List<Product>());
             }
 
-            stores[store].Add(product, price);
+            stores[store].Add(new Product(product, price));
         }
+    }
+    class Product
+    {
+        public Product(string name, double price)
+        {
+            Name = name;
+            Price = price;
+        }
+
+        public string Name { get; set; }
+        public double Price { get; set; }
+        public override string ToString() => $"Product: {Name}, Price: {Price}";
+        
     }
 }
