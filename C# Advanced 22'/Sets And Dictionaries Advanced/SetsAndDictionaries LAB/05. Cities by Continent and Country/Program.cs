@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml.Serialization;
 
-namespace _05._Cities_by_Continent_and_Country
+namespace CitiesByContinentsAndCountries
 {
     internal class Program
     {
@@ -10,51 +11,87 @@ namespace _05._Cities_by_Continent_and_Country
         {
             //Create a program that reads continents, countries and their cities put them in a nested dictionary and prints them.
 
-            var continents = new Dictionary<string, Dictionary<string, List<string>>>();
+            //dict of                       cont, List<Country>(country, city)
+            var continents = new List<Continent>();
 
             int n = int.Parse(Console.ReadLine());
 
-            AddData(continents, n);
-
-            PrintOutput(continents);
-
-        }
-
-        static void PrintOutput(Dictionary<string, Dictionary<string, List<string>>> continents)
-        {
-            foreach (var cont in continents)
-            {
-                Console.WriteLine($"{cont.Key}:");
-                foreach (var (country, city) in cont.Value)
-                {
-                    Console.WriteLine($"  {country} -> {string.Join(", ", city)}");
-                }
-            }
-        }
-
-        static void AddData(Dictionary<string, Dictionary<string, List<string>>> continents, int n)
-        {
             for (int i = 0; i < n; i++)
             {
-                var input = Console.ReadLine()
+                var tokens = Console.ReadLine()
                     .Split(" ", StringSplitOptions.RemoveEmptyEntries);
 
-                string continent = input[0];
-                string country = input[1];
-                string city = input[2];
+                var continent = tokens[0];
+                var country = tokens[1];
+                var city = tokens[2];
 
-                if (!continents.ContainsKey(continent))
+                Continent cont = AddContinent(continents, continent);
+
+                Country thisCountry = AddCountry(country, cont);
+
+                //add the city in the country
+                thisCountry.Cities.Add(city);
+            }
+
+            PrintOutput(continents);
+        }
+
+        static void PrintOutput(List<Continent> continents)
+        {
+            foreach (var continent in continents)
+            {
+                Console.WriteLine($"{continent.ContinentName}:");
+
+                foreach (var country in continent.Countries)
                 {
-                    continents.Add(continent, new Dictionary<string, List<string>>());
+                    Console.WriteLine($"  {country.CountryName} -> {string.Join(", ", country.Cities)}");
                 }
-
-                if (!continents[continent].ContainsKey(country))
-                {
-                    continents[continent].Add(country, new List<string>());
-                }
-
-                continents[continent][country].Add(city);
             }
         }
+
+        static Country AddCountry(string country, Continent cont)
+        {
+            //check if country exists in continent
+            if (!cont.Countries.Any(x => x.CountryName == country))
+            {
+                cont.Countries.Add(new Country(country));
+            }
+            Country thisCountry = cont.Countries.Find(x => x.CountryName == country);
+            return thisCountry;
+        }
+
+        static Continent AddContinent(List<Continent> continents, string continent)
+        {
+            //check if continent exists in continents
+            if (!continents.Any(x => x.ContinentName == continent))
+            {
+                continents.Add(new Continent(continent));
+            }
+            Continent cont = continents.Find(x => x.ContinentName == continent);
+            return cont;
+        }
+    }
+    class Continent
+    {
+        public Continent(string continentName)
+        {
+            ContinentName = continentName;
+            Countries = new List<Country>();
+        }
+
+        public string ContinentName { get; set; }
+        public List<Country> Countries { get; set; }
+    }
+
+    class Country
+    {
+        public Country(string countryName)
+        {
+            CountryName = countryName;
+            Cities = new List<string>();
+        }
+
+        public string CountryName { get; set; }
+        public List<string> Cities { get; set; }
     }
 }
