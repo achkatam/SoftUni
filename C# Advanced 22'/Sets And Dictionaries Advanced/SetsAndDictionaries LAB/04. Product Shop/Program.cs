@@ -8,7 +8,7 @@ namespace ProductShop
     {
         static void Main(string[] args)
         {
-            var stores = new Dictionary<string, List<Product>>();
+            var stores = new List<Store>();
 
             string command = Console.ReadLine();
 
@@ -21,8 +21,17 @@ namespace ProductShop
                 var product = tokens[1];
                 var price = double.Parse(tokens[2]);
 
-                AddStore(stores, store, product, price);
+                if (!stores.Any(x => x.StoreName == store))
+                {
+                    stores.Add(new Store(store));
+                }
+                Store thisStore = stores.Find(x => x.StoreName == store);
 
+                if (!thisStore.Products.Any(x => x.Name == product))
+                {
+                    thisStore.Products.Add(new Product(product, price));
+                }
+                Product thisProduct = thisStore.Products.Find(x => x.Name == product);
 
                 command = Console.ReadLine();
             }
@@ -40,29 +49,29 @@ namespace ProductShop
 
         }
 
-        static void PrintOutput(Dictionary<string, List<Product>> stores)
+        static void PrintOutput(List<Store> stores)
         {
-            foreach (var store in stores.OrderBy(x => x.Key))
+            foreach (var store in stores.OrderBy(s => s.StoreName))
             {
-                Console.WriteLine($"{store.Key}->");
-
-                foreach (var item in store.Value)
+                Console.WriteLine($"{store.StoreName}->");
+                foreach (var item in store.Products)
                 {
-                    Console.WriteLine(item);
+                    Console.WriteLine($"{item}");
                 }
             }
         }
-
-        static void AddStore(Dictionary<string, List<Product>> stores, string store, string product, double price)
-        {
-            if (!stores.ContainsKey(store))
-            {
-                stores.Add(store, new List<Product>());
-            }
-
-            stores[store].Add(new Product(product, price));
-        }
     }
+    class Store
+    {
+        public Store(string storeName)
+        {
+            StoreName = storeName;
+            Products = new List<Product>();
+        }
+        public string StoreName { get; set; }
+        public List<Product> Products { get; set; }
+    }
+
     class Product
     {
         public Product(string name, double price)
@@ -74,6 +83,6 @@ namespace ProductShop
         public string Name { get; set; }
         public double Price { get; set; }
         public override string ToString() => $"Product: {Name}, Price: {Price}";
-        
+
     }
 }
