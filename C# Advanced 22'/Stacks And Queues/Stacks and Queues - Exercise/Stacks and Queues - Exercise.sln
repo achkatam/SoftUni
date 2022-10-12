@@ -17,13 +17,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "03. Maximum and Minimum Ele
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "04. Fast Food", "04. Fast Food\04. Fast Food.csproj", "{BEC036E4-A9A0-4570-B330-BE5CE9F222E9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "05. Fashion Boutique", "05. Fashion Boutique\05. Fashion Boutique.csproj", "{E2C81512-E23E-4E19-B719-13CF9591462A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "05. Fashion Boutique", "05. Fashion Boutique\05. Fashion Boutique.csproj", "{E2C81512-E23E-4E19-B719-13CF9591462A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "08. Balanced Parenthesis", "08. Balanced Parenthesis\08. Balanced Parenthesis.csproj", "{2F86B161-3C92-44CB-9D5A-B802EB329326}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "08. Balanced Parenthesis", "08. Balanced Parenthesis\08. Balanced Parenthesis.csproj", "{2F86B161-3C92-44CB-9D5A-B802EB329326}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "10. Crossroads", "10. Crossroads\10. Crossroads.csproj", "{8C93C703-5796-46E2-A29A-76B729054A75}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "10. Crossroads", "10. Crossroads\10. Crossroads.csproj", "{8C93C703-5796-46E2-A29A-76B729054A75}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "12. Cups and Bottles", "12. Cups and Bottles\12. Cups and Bottles.csproj", "{F0F14182-93AF-4521-8A18-F89A894D516E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "12. Cups and Bottles", "12. Cups and Bottles\12. Cups and Bottles.csproj", "{F0F14182-93AF-4521-8A18-F89A894D516E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "07. Truck Tour", "07. Truck Tour\07. Truck Tour.csproj", "{45CE887B-ACC6-4942-9F42-F6532C6191F4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -75,6 +77,10 @@ Global
 		{F0F14182-93AF-4521-8A18-F89A894D516E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F0F14182-93AF-4521-8A18-F89A894D516E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F0F14182-93AF-4521-8A18-F89A894D516E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45CE887B-ACC6-4942-9F42-F6532C6191F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45CE887B-ACC6-4942-9F42-F6532C6191F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45CE887B-ACC6-4942-9F42-F6532C6191F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45CE887B-ACC6-4942-9F42-F6532C6191F4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
