@@ -58,7 +58,7 @@
         private void CreateHeroes()
         {
             int n = int.Parse(this.reader.ReadLine());
-
+//add counter.. By constraints the loop should last until full set of heores is created
             int validHeroes = 0;
 
             while (validHeroes != n)
