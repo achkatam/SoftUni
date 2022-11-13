@@ -7,7 +7,8 @@
 
     public abstract class Vehicle : IVehicle
     {
-        protected Vehicle(double fuelQuantity, double fuelConsumption, double fuelConsumptionIncrement)
+
+        protected Vehicle(double fuelQuantity, double fuelConsumption, double fuelConsumptionIncrement) 
         {
             this.FuelQuantity = fuelQuantity;
             //the counsumption increses coused by using the AC

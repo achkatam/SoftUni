@@ -66,11 +66,12 @@
             string[] vehicleArgs = this.reader.ReadLine()
                 .Split(" ", StringSplitOptions.RemoveEmptyEntries);
             string vehicleType = vehicleArgs[0];
-            double vehicleFuelQty = double.Parse(vehicleArgs[1]);
             double vehicleFuelConsumption = double.Parse(vehicleArgs[2]);
+            double vehicleFuelQty = double.Parse(vehicleArgs[1]);
 
             IVehicle vehicle =
                 this.vehicleFactory.CreateVehicle(vehicleType, vehicleFuelQty, vehicleFuelConsumption);
+
             return vehicle;
         }
 
@@ -84,6 +85,7 @@
 
             IVehicle vehicleToProcess = this.vehicles
                 .FirstOrDefault(v => v.GetType().Name == vehicleType);
+
             if (vehicleToProcess == null)
             {
                 throw new InvalidVehicleTypeException();
