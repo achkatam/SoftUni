@@ -1,0 +1,27 @@
+[
+  {
+    "Id": 1,
+    "Name": "SunflowerOil",
+    "Price": 4.5
+  },
+  {
+    "Id": 2,
+    "Name": "OliveOil",
+    "Price": 10.0
+  },
+  {
+    "Id": 3,
+    "Name": "Tomatoes",
+    "Price": 2.1
+  },
+  {
+    "Id": 1,
+    "Name": "TestProduct",
+    "Price": 5.0
+  },
+  {
+    "Id": 1,
+    "Name": "TestProduct",
+    "Price": 5.0
+  }
+]
