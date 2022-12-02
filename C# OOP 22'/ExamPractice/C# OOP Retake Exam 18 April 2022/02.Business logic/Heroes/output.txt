@@ -1,0 +1,28 @@
+Hero name cannot be null or empty.
+Hero armour cannot be below 0.
+Hero health cannot be below 0.
+Successfully added Sir ldis to the collection.
+Successfully added Barbarian Alessia to the collection.
+Weapon type cannot be null or empty.
+Durability cannot be below 0.
+A claymore Dainsleif is added to the collection.
+A mace Willbreaker is added to the collection.
+A mace Stormcaller is added to the collection.
+Hero ldis can participate in battle using a claymore.
+Hero Alessia can participate in battle using a mace.
+Weapon Willbreaker does not exist.
+Hero Alessia is well-armed.
+Successfully added Sir Berenger to the collection.
+The knights took 0 casualties but won the battle.
+Barbarian: Alessia
+--Health: 0
+--Armour: 0
+--Weapon: Willbreaker
+Knight: Berenger
+--Health: 50
+--Armour: 90
+--Weapon: Unarmed
+Knight: ldis
+--Health: 15
+--Armour: 0
+--Weapon: Dainsleif
