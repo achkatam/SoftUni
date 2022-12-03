@@ -1,0 +1,12 @@
+Captain Chester_Nimitz is hired.
+Captain Karl_Donitz is hired.
+Battleship USS_Colorado is manufactured with the main weapon caliber of 16 inches and a maximum speed of 21 knots.
+Captain Chester_Nimitz command vessel USS_Colorado.
+Battleship USS_Colorado toggled sonar mode.
+- USS_Colorado
+ *Type: Battleship
+ *Armor thickness: 300
+ *Main weapon caliber: 56
+ *Speed: 16 knots
+ *Targets: None
+ *Sonar mode: ON
