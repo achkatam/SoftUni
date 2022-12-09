@@ -1,117 +1,120 @@
-﻿namespace PlanetWars.Models.Planets
-{
-    using PlanetWars.Models.MilitaryUnits.Contracts;
-    using PlanetWars.Models.Planets.Contracts;
-    using PlanetWars.Models.Weapons.Contracts;
-    using PlanetWars.Repositories;
-    using PlanetWars.Utilities.Messages;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Runtime.CompilerServices;
-    using System.Text;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using PlanetWars.Models.MilitaryUnits;
+using PlanetWars.Models.MilitaryUnits.Contracts;
+using PlanetWars.Models.Planets.Contracts;
+using PlanetWars.Models.Weapons;
+using PlanetWars.Models.Weapons.Contracts;
+using PlanetWars.Repositories;
+using PlanetWars.Repositories.Contracts;
+using PlanetWars.Utilities.Messages;
 
-    public abstract class Planet : IPlanet
+namespace PlanetWars.Models.Planets
+{
+    public class Planet : IPlanet
     {
         private string name;
         private double budget;
-        private UnitRepository units;
-        private WeaponRepository weapons;
-        private PlanetRepository planets; 
-        protected Planet(string name, double budget)
+        private IRepository<IMilitaryUnit> unitRepository;
+        private IRepository<IWeapon> weaponRepository;
+
+        public Planet(string name, double budget)
         {
-            this.name = name;
-            this.budget = budget;
-            this.units = new UnitRepository();
-            this.weapons = new WeaponRepository();
+            this.Name = name;
+            this.Budget = budget;
+            this.unitRepository = new UnitRepository();
+            this.weaponRepository = new WeaponRepository();
         }
 
         public string Name
         {
-            get => this.name;
+            get { return name; }
             private set
             {
                 if (string.IsNullOrWhiteSpace(value))
+                {
                     throw new ArgumentException(ExceptionMessages.InvalidPlanetName);
+                }
 
-                this.name = value;
+                name = value;
             }
         }
 
         public double Budget
         {
-            get => this.budget;
+            get { return budget; }
             private set
             {
                 if (value < 0)
                     throw new ArgumentException(ExceptionMessages.InvalidBudgetAmount);
 
-                this.budget = value;
+                budget = value;
             }
         }
 
-        public double MilitaryPower => GetTotalPower();
+        public double MilitaryPower => CalculateMilitaryPower();
+         
+        public IReadOnlyCollection<IMilitaryUnit> Army => this.unitRepository.Models;
 
-        public IReadOnlyCollection<IMilitaryUnit> Army => this.units.Models;
+        public IReadOnlyCollection<IWeapon> Weapons => this.weaponRepository.Models;
 
-        public IReadOnlyCollection<IWeapon> Weapons => this.weapons.Models;
+        public void AddUnit(IMilitaryUnit unit) => this.unitRepository.AddItem(unit);
 
-        public void AddUnit(IMilitaryUnit unit)
+        public void AddWeapon(IWeapon weapon) => this.weaponRepository.AddItem(weapon);
+
+        public string PlanetInfo()
         {
-           this.units.AddItem(unit);
-        }
+           var sb = new StringBuilder();
 
-        public void AddWeapon(IWeapon weapon)
-        {
-            this.weapons.AddItem(weapon);
-        }
+            string forcesOutput = this.Army.Any() ? $"{string.Join(", ", this.Army.Select(x => x.GetType().Name))}" : "No units";
 
-        public void TrainArmy()
-        {
-            foreach (var unit in Army)
-            {
-                unit.IncreaseEndurance();
-            }
-        }
+            string combatOutput = this.Weapons.Count
+                 > 0 ? $"{string.Join(", ", this.Weapons.Select(x => x.GetType().Name))}" : "No weapons";
 
-        public void Spend(double amount)
-        {
-             if (this.Budget < amount)
-                throw new InvalidOperationException(ExceptionMessages.UnsufficientBudget);
+            sb
+                .AppendLine($"Planet: {this.Name}")
+                .AppendLine($"--Budget: {this.Budget,2} billion QUID")
+                .AppendLine($"--Forces: {forcesOutput}")
+                .AppendLine($"--Combat equipment: {combatOutput}")
+                .AppendLine($"--Military Power: {this.MilitaryPower}");
 
-            this.Budget -= amount;
+            return sb.ToString().TrimEnd();
         }
 
         public void Profit(double amount)
         {
             this.Budget += amount;
         }
-        public string PlanetInfo()
-        {
-            var sb = new StringBuilder();
 
-            sb
-                .AppendLine($"Planet: {this.Name}")
-            .AppendLine($"--Budget: {this.Budget} billion QUID")
-            .Append($"--Forces:")
-            .AppendLine(this.Army.Any() ? $"{string.Join(", ", this.units)}" : "No units")
-            .Append($"--Combat equipment:")
-            .AppendLine(this.Weapons.Any() ? $"{string.Join(", ", this.weapons)}" : "No weapons")
-            .AppendLine($"--Military Power: {this.MilitaryPower}");
-             
-            return sb.ToString().Trim();
+        public void Spend(double amount)
+        {
+            if (this.Budget < amount)
+            {
+                throw new InvalidOperationException(ExceptionMessages.UnsufficientBudget);
+            }
+
+            this.Budget -= amount;
         }
-         
-        private double GetTotalPower()
+
+        public void TrainArmy()
         {
-            double totalPower = Army.Select(x => x.EnduranceLevel).Sum() +
-                Weapons.Select(x => x.DestructionLevel).Sum();
+            foreach (var unit in this.Army)
+            {
+                unit.IncreaseEndurance();
+            }
+        }
 
-            if (Army.Any(x => x.GetType().Name == "AnonymousImpactUnit"))
-                totalPower += totalPower + (30 * 100);
+        private double CalculateMilitaryPower()
+        {
+            double totalPower = this.Army.Sum(x => x.EnduranceLevel) + this.Weapons.Sum(x => x.DestructionLevel);
 
-            if (Weapons.Any(x => x.GetType().Name == "NuclearWeapon"))
-                totalPower += totalPower + (45 * 100);
+            if (this.unitRepository.Models.Any(x => x.GetType() == typeof(AnonymousImpactUnit)))
+                   totalPower *= 1.3;
+                
+            if(this.weaponRepository.Models.Any(x => x.GetType() == typeof(NuclearWeapon)))
+                totalPower *= 1.45;
 
             return Math.Round(totalPower, 3);
         }
