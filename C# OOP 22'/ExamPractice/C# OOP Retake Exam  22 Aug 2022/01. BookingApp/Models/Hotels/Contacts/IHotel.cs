@@ -1,6 +1,5 @@
 ﻿namespace BookingApp.Models.Hotels.Contacts
 {
-    using BookingApp.Repositories;
     using BookingApp.Repositories.Contracts;
     using global::BookingApp.Models.Bookings.Contracts;
     using global::BookingApp.Models.Rooms.Contracts;

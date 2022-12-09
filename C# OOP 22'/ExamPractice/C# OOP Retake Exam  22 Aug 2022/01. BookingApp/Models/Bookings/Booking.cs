@@ -1,45 +1,43 @@
-﻿namespace BookingApp.Models.Bookings
-{
-    using System;
-    using System.Text;
-    using BookingApp.Models.Bookings.Contracts;
-    using BookingApp.Models.Rooms.Contracts;
-    using BookingApp.Utilities.Messages;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using BookingApp.Models.Bookings.Contracts;
+using BookingApp.Models.Rooms.Contracts;
+using BookingApp.Utilities.Messages;
 
+namespace BookingApp.Models.Bookings
+{
     public class Booking : IBooking
     {
-        private IRoom room;
-        private int residenceDuration;
+        private int duration;
         private int adultsCount;
         private int childrenCount;
-        private int bookingNumber;
 
         public Booking(IRoom room, int residenceDuration, int adultsCount, int childrenCount, int bookingNumber)
         {
-            this.room = room;
-            this.residenceDuration = residenceDuration;
-            this.adultsCount = adultsCount;
-            this.childrenCount = childrenCount;
-            this.bookingNumber = bookingNumber;
+            this.Room = room;
+            this.ResidenceDuration = residenceDuration;
+            this.AdultsCount = adultsCount;
+            this.ChildrenCount = childrenCount;
+            this.BookingNumber = bookingNumber;
         }
-
-        public IRoom Room => this.room;
+        public IRoom Room { get; private set; }
 
         public int ResidenceDuration
         {
-            get => this.residenceDuration;
+            get { return this.duration; }
             private set
             {
                 if (value <= 0)
                     throw new ArgumentException(ExceptionMessages.DurationZeroOrLess);
 
-                this.residenceDuration = value;
+                this.duration = value;
             }
         }
 
         public int AdultsCount
         {
-            get => this.adultsCount;
+            get { return this.adultsCount; }
             private set
             {
                 if (value < 1)
@@ -51,7 +49,7 @@
 
         public int ChildrenCount
         {
-            get => this.childrenCount;
+            get { return this.childrenCount; }
             private set
             {
                 if (value < 0)
@@ -61,7 +59,7 @@
             }
         }
 
-        public int BookingNumber => this.bookingNumber;
+        public int BookingNumber { get; private set; }
 
         public string BookingSummary()
         {
@@ -76,7 +74,6 @@
             return sb.ToString().TrimEnd();
         }
 
-        private double TotalPaid()
-            => Math.Round(this.ResidenceDuration * this.Room.PricePerNight, 2);
+        private double TotalPaid() => Math.Round(this.ResidenceDuration * this.Room.PricePerNight, 2);
     }
 }
