@@ -1,6 +1,8 @@
 ﻿namespace ChristmasPastryShop.Core
 {
+    using System;
     using System.Linq;
+    using System.Reflection;
     using System.Text;
     using ChristmasPastryShop.Core.Contracts;
     using ChristmasPastryShop.Models.Booths;
@@ -41,10 +43,19 @@
                 return string.Format(OutputMessages.InvalidDelicacyType, delicacyTypeName);
             }
 
-            if (this.boothRepository.Models.Any(x => x.DelicacyMenu.Models.Any(x => x.Name == delicacyName)))
+            var booth = this.boothRepository.Models.FirstOrDefault(x => x.BoothId == boothId);
+
+
+            if (booth.DelicacyMenu.Models.Any(x => x.Name == delicacyName))
             {
                 return string.Format(OutputMessages.DelicacyAlreadyAdded, delicacyName);
             }
+
+            //Type type = Assembly.GetExecutingAssembly()
+            //    .GetTypes().Where(x => typeof(IDelicacy).IsAssignableFrom(x)
+            //    && x.Name.StartsWith(delicacyTypeName)).FirstOrDefault();
+
+            //var delicacy = (IDelicacy)Activator.CreateInstance(type, new object[] { delicacyName });
 
             IDelicacy delicacy = null;
 
@@ -58,7 +69,6 @@
                     break;
             }
 
-            var booth = this.boothRepository.Models.FirstOrDefault(x => x.BoothId == boothId);
 
             booth.DelicacyMenu.AddModel(delicacy);
 
@@ -79,13 +89,19 @@
                 return string.Format(OutputMessages.InvalidCocktailSize, size);
             }
 
-            if (this.boothRepository.Models.Any(x => x.CocktailMenu.Models.Any(x => x.Name == cocktailName && x.Size == size)))
+            var booth = this.boothRepository.Models.FirstOrDefault(x => x.BoothId == boothId);
+
+            if (booth.CocktailMenu.Models.Any(x => x.Name == cocktailName
+            && x.Size == size))
             {
                 return string.Format(OutputMessages.CocktailAlreadyAdded, size, cocktailName);
             }
 
-            var booth = this.boothRepository.Models.FirstOrDefault(x => x.BoothId == boothId);
+            //Type type = Assembly.GetExecutingAssembly()
+            //    .GetTypes().Where(x => typeof(ICocktail).IsAssignableFrom(x)
+            //    && x.Name.StartsWith(cocktailTypeName)).FirstOrDefault();
 
+            //var cocktail = (ICocktail)Activator.CreateInstance(type, new object[] { cocktailName, size });
             ICocktail cocktail = null;
 
             switch (cocktailTypeName)
@@ -135,31 +151,33 @@
                 return string.Format(OutputMessages.NotRecognizedType, itemTypeName);
             }
 
+            var booth = this.boothRepository.Models.FirstOrDefault(x => x.BoothId == boothId);
+
+            if (!booth.CocktailMenu.Models.Any(x => x.Name == itemName)
+                && !booth.DelicacyMenu.Models.Any(x => x.Name == itemName))
+            {
+                return string.Format(OutputMessages.CocktailStillNotAdded, itemTypeName, itemName);
+            }
+
+            
+            //reflection 
+            Type type;
 
             if (itemTypeName == nameof(MulledWine) || itemTypeName == nameof(Hibernation))
             {
                 string size = tokens[3];
 
-                ICocktail cocktail = null;
+                type = Assembly.GetExecutingAssembly()
+                .GetTypes().Where(x => typeof(ICocktail).IsAssignableFrom(x)
+                && x.Name.StartsWith(itemTypeName)).FirstOrDefault();
 
+                var cocktail = (ICocktail)Activator.CreateInstance(type, new object[] { itemName, size });
 
-                switch (itemTypeName)
-                {
-                    case "Hibernation":
-                        cocktail = new Hibernation(itemName, size);
-                        break;
-                    case "MulledWine":
-                        cocktail = new MulledWine(itemName, size);
-                        break;
-                }
-
-                var booth = this.boothRepository.Models.FirstOrDefault(x => x.BoothId == boothId);
 
                 if (!booth.CocktailMenu.Models.Any(x => x.GetType().Name == itemTypeName && x.Name == cocktail.Name && x.Size == size))
                 {
                     return string.Format(OutputMessages.CocktailStillNotAdded, size, itemName);
                 }
-
 
 
                 booth.UpdateCurrentBill(cocktail.Price * pieces);
@@ -168,19 +186,12 @@
             }
             else if (itemTypeName == nameof(Gingerbread) || itemTypeName == nameof(Stolen))
             {
-                IDelicacy delicacy = null;
+                type = Assembly.GetExecutingAssembly()
+               .GetTypes().Where(x => typeof(IDelicacy).IsAssignableFrom(x)
+               && x.Name.StartsWith(itemTypeName)).FirstOrDefault();
 
-                switch (itemTypeName)
-                {
-                    case "Stolen":
-                        delicacy = new Stolen(itemName);
-                        break;
-                    case "Gingerbread":
-                        delicacy = new Gingerbread(itemName);
-                        break;
-                }
+                var delicacy = (IDelicacy)Activator.CreateInstance(type, new object[] { itemName });
 
-                var booth = this.boothRepository.Models.FirstOrDefault(x => x.BoothId == boothId);
 
                 if (!booth.DelicacyMenu.Models.Any(x => x.GetType().Name == itemTypeName && x.Name == delicacy.Name))
                 {
@@ -189,8 +200,8 @@
                 booth.UpdateCurrentBill(delicacy.Price * pieces);
 
                 return string.Format(OutputMessages.SuccessfullyOrdered, booth.BoothId, pieces, itemName);
-
             }
+
 
             return null;
         }
