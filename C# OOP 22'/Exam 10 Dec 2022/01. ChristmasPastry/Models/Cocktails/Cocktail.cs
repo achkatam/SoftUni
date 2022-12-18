@@ -34,8 +34,7 @@
 
         public double Price
         {
-            get
-            { return this.price; }
+            get { return this.price; }
             private set
             {
                 if (this.Size == "Large")
@@ -45,15 +44,15 @@
                 else if (this.Size == "Middle")
                 {
 
-                    this.price = (2.0 / 3.0) * value;
+                    this.price = (2 / 3.0) * value;
 
                 }
                 else if (this.Size == "Small")
                 {
-                    this.price = (1.0 / 3.0) * value;
+                    this.price = (1 / 3.0) * value;
                 }
             }
-        } 
+        }
         public override string ToString()
             => $"{this.Name} ({this.Size}) - {this.Price:f2} lv";
     }
