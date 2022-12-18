@@ -1,6 +1,8 @@
 ﻿namespace ChristmasPastryShop.IO
-{ 
-    internal class FileWriter
+{
+    using ChristmasPastryShop.IO.Contracts;
+
+    public class FileWriter : IWriter
     {
     }
 }
