@@ -2,7 +2,11 @@
 
 # Problem solutions
 
-## [C# Basic](https://github.com/achkatam/SoftUni/tree/main/C%23%20Programming%20Basics%20January%2022'/Basics%20-%20all%20the%20sc)  
+<details>
+<summary><h2> C# Basic </h2></summary>
+
+## [C# Basic - all solutions](https://github.com/achkatam/SoftUni/tree/main/C%23%20Programming%20Basics%20January%2022'/Basics%20-%20all%20the%20sc)  
+</details>
 
 ***
 <details>
