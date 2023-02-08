@@ -7,7 +7,7 @@
 ### 5.[D]ependancy Inversion
 
 # 1.1. Single Responsibility 
-- Every class should be responsible for **only a single part of the functionality** and that **responsibility** should be **entirely encapsulation** by the class!
+- Every class should be responsible for **only a single part of the functionality** and that **responsibility** should be **entirely encapsulated** by the class!
 # 1.2. Strong Cohesion -
 - Refers to the grouping of functionality related processes into a particular module.
 1.2.1. Each task maps a single code unit.
@@ -17,14 +17,26 @@
 # 1.3. Loose Coupling
 - the degree of dependance between modules - The strength of relationship between modules.
 
+## Example: 
+- In Amazon you can find phone case with bottle opener. Does not even make sense. That BREAKS the principle!
+
 # 2.1. Open/Closed 
  - Software entities like **classes, modules and functions** should be **OPEN** for extension and **CLOSED** for modification.
+ 
+ ## Example:
+ - You own an IPhone. Its OS is **closed** for modification for you but it's **open** for extension via AppStore for example. That extends its base functionality and capability of the base phone - you can play games, take pics, videos and etc. 
 
 # 3.1. Liskov Subtitution
 - Derived types /child classes/ should be entirely subtituable for their base types /parent classes/
 
+## Example:
+- You make a cake. Unfortunartely you are out of sugar. You can use cane sugar instead.
+
 # 4.1. Interface Segregation
 - Segregate to smaller and more specific interfaces. **No code should be forced to depend on methods it does NOT use**.
+
+## Example:
+- https://medium.com/@ipapikas/solid-series-4-5-interface-segregation-principle-8e901d189428
 
 # 5.1. Dependancy Inversion
 - High-level module should **NOT** depend on low-level module, both depend on abstratcion. Abstraction should **NOT** depend on details. Details depend on abstraction.
