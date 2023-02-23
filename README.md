@@ -56,4 +56,5 @@
 ### 1. [Fundamentals Exam](https://github.com/achkatam/SoftUni/tree/main/C%23%20Programming%20Fundamentals%20May%2022'/C%23%20Fundamentals%20May%2022'%20-%20Final%20Exam)
 ### 2. [Advanced Exam](https://github.com/achkatam/SoftUni/tree/main/C%23%20Advanced%2022'/ExamPractice/Exam)
 ### 3. [OOP Exam](https://github.com/achkatam/SoftUni/tree/main/C%23%20OOP%2022'/Exam%2010%20Dec%202022)
+### 4. [MSSQL Exam](https://github.com/achkatam/MSSQL-Databases-2023/tree/main/Exam)
 </details>
