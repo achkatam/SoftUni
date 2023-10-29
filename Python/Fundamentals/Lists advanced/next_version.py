@@ -1,5 +1,5 @@
 string_input = [int(num) for num in input().split('.')]
-string_input[-1] +=1
+string_input[-1] += 1
 
 for idx in range(len(string_input) - 1, -1, -1):
     if string_input[idx] > 9:
