@@ -2,7 +2,7 @@ import sys
 
 
 def if_exist(index: int, targets: list):
-    return 0 <= index <= len(targets) - 1
+    return 0 <= index and index <= len(targets) - 1
 
 
 def shoot(index: int, power: int, targets: list):
@@ -22,15 +22,15 @@ def add(index: int, value: int, targets: list):
 
 
 def strike(index: int, radius: int, targets: list):
-    if not if_exist(index, targets) and index - radius < 0 and index + radius > len(targets) - 1:
+    if not if_exist(index, targets) or index - radius < 0 or index + radius > len(targets) - 1:
         print(f"Strike missed!")
-        sys.exit(0)
+        return
 
     start_index = index - radius
     end_index = index + radius
 
     del targets[start_index: end_index + 1]
-    #targets = [targets[i] for i in range(len(targets)) if i < start_index or i > end_index]
+    # targets = [targets[i] for i in range(len(targets)) if i < start_index or i > end_index]
     return targets
 
 
