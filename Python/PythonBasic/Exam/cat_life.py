@@ -21,16 +21,10 @@ if breed_inpt not in males.keys() or breed_inpt not in females.keys():
     print(f"{breed_inpt} is invalid cat!")
     sys.exit(0)
 
-humans_month = 0
+cat_dict = males if sex_inpt.lower() == 'm' else females
 
-if sex_inpt == "m":
-    for breed, lifespan in males.items():
-        if breed_inpt == breed:
-            humans_month = lifespan * 12
-elif sex_inpt == "f":
-    for breed, lifespan in females.items():
-        if breed_inpt == breed:
-            humans_month = lifespan * 12
-
-cats_life = humans_month / 6
-print(f"{int(cats_life)} cat months")
+if breed_inpt in cat_dict:
+    lifespan_in_years = cat_dict[breed_inpt]
+    lifespan_in_months = lifespan_in_years * 12
+    cats_life = lifespan_in_months / 6
+    print(f"{int(cats_life)} cat months")
