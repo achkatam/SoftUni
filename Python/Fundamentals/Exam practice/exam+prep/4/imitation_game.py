@@ -1,46 +1,51 @@
-def print_output(string: str):
-    print(f"The decrypted message is: {string}")
+def output(message):
+    print(f"The decrypted message is: {message}")
 
 
-def move(string: str, num_letters: int):
-    letters_to_add = string[0:num_letters]
-    string = string[num_letters:(len(string))] + letters_to_add
-
-    return string
+def change_all(message, substring, replacement):
+    message = message.replace(substring, replacement)
+    return message
 
 
-def insert(string: str, idx: int, value: str):
-    string = string[0:idx] + value + string[idx: len(string)]
-
-    return string
-
-
-def change_all(string: str, substring: str, new_string: str):
-    string = string.replace(substring, new_string)
-
-    return string
+def insert(message, idx, value):
+    message = message[:idx] + value + message[idx:]
+    return message
 
 
-string = input()
+def move(message, num_letters):
+    message = message[num_letters:] + message[:num_letters]
+    return message
 
-command = input()
 
-while command != "Decode":
-    tokens = command.split("|")
-    cmd = tokens[0]
+def decode_message(message, cmd_list):
+    for command in cmd_list:
+        tokens = command.split("|")
+        cmd = tokens[0]
 
-    if cmd == "Move":
-        num_letters = int(tokens[1])
-        string = move(string, num_letters)
-    elif cmd == "Insert":
-        idx = int(tokens[1])
-        value = tokens[2]
-        string = insert(string, idx, value)
-    elif cmd == "ChangeAll":
-        substring = tokens[1]
-        new_substring = tokens[2]
-        string = change_all(string, substring, new_substring)
+        if cmd == "Move":
+            num_letters = int(tokens[1])
+            message = move(message, num_letters)
+        elif cmd == "Insert":
+            idx = int(tokens[1])
+            value = tokens[2]
+            message = insert(message, idx, value)
+        elif cmd == "ChangeAll":
+            substring = tokens[1]
+            replacement = tokens[2]
+            message = change_all(message, substring, replacement)
+        elif cmd == "Decode":
+            output(message)
 
+
+message = input()
+
+cmd_list = []
+
+while True:
     command = input()
+    cmd_list.append(command)
 
-print_output(string)
+    if command == "Decode":
+        break
+
+decode_message(message, cmd_list)
