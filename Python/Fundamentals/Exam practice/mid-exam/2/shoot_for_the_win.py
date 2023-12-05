@@ -1,5 +1,4 @@
 targets = [int(x) for x in input().split()]
-counter = 0
 
 command = input()
 
@@ -9,7 +8,6 @@ while command != "End":
     if 0 <= target_idx <= len(targets) - 1:
         if targets[target_idx] != -1:
             curr_target = targets[target_idx]
-            counter += 1
 
             targets[target_idx] = -1
 
@@ -21,4 +19,6 @@ while command != "End":
                         targets[i] += curr_target
 
     command = input()
-print(f"Shot targets: {counter} -> {' '.join(map(str, targets))}")
+
+shot_targets = [int(x) for x in targets if x == -1]
+print(f"Shot targets: {len(shot_targets)} -> {' '.join(map(str, targets))}")
