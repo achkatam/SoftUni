@@ -1,22 +1,24 @@
 import sys
 
-initial_energy = int(input())
+init_hp = int(input())
+
+cnt = 0
 
 command = input()
-counter = 0
+
 while command != "End of battle":
-    distance = int(command)
-    if distance > initial_energy:
-        print(f"Not enough energy! Game ends with {counter} won battles and {initial_energy} energy")
+    needed_hp = int(command)
+    if init_hp < needed_hp:
+        print(f"Not enough energy! Game ends with {cnt} won battles and {init_hp} energy")
         sys.exit(0)
 
-    initial_energy -= distance
-    counter += 1
+    init_hp -= needed_hp
+    cnt += 1
 
-    if counter % 3 == 0:
-        initial_energy += counter
+    if cnt % 3 == 0:
+        init_hp += cnt
 
     command = input()
 
-if initial_energy >= 0:
-    print(f"Won battles: {counter}. Energy left: {initial_energy}")
+if init_hp >= 0:
+    print(f"Won battles: {cnt}. Energy left: {init_hp}")
