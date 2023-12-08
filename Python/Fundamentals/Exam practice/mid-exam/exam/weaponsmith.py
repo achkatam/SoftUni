@@ -35,3 +35,5 @@ while command != "Done":
     command = input()
 
 print(f"You crafted {''.join(weapon_name)}!")
+
+# passed 100/100

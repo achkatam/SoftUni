@@ -16,3 +16,5 @@ if saved_sum >= trip_price:
     print(f"Bravo! You can go to Disneyland and you will have {saved_sum-trip_price:.2f}lv. for souvenirs.")
 else:
     print(f"Sorry. You need {trip_price-saved_sum:.2f}lv. more.")
+
+# passed 100/100

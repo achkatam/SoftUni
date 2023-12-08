@@ -41,3 +41,5 @@ while command != "Ready":
     command = input()
 
 print(" ".join(new_deck))
+
+# passed 100/100
