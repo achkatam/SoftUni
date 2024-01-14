@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>The app</title>
+</head>
+<body>
+<h1>{{ title }}</h1>
+
+{% if tasks_count == 0 %}
+    <h2>No tasks!!!</h2>
+{% elif tasks_count == 1 %}
+    <h2>Task: {{ tasks_count }}</h2>
+{% else %}
+    <h2>Tasks: {{ tasks_count }}</h2>
+{% endif %}
+
+<form action="/" method="get">
+    <input
+            type="text"
+            name="title_filter"
+            value="{{ title_filter }}"
+            placeholder="Enter filter"
+            autocomplete="off"
+    />
+    <button>Filter</button>
+</form>
+
+<ul>
+    {% for task in tasks_list %}
+        <li>
+            <h2>{{ task.title }}</h2>
+            <p>{{ task.description }}</p>
+        </li>
+    {% endfor %}
+</ul>
+
+
+</body>
+</html>
