@@ -1,0 +1,22 @@
+<header>
+    <div>
+        <h1><a href="{% url 'index' %}">
+            {% if title %}
+                {{ title }}
+            {% else %}
+                Angel's App
+            {% endif %}
+        </a></h1>
+        {% if request.user.is_authenticated %}
+            {{ request.user }}
+        {% else %}
+            Anonymous
+        {% endif %}
+    </div>
+    <nav>
+        <ul>
+            <li><a href="{% url 'index' %}">Index</a></li>
+            <li><a href="{% url 'about' %}">About</a></li>
+        </ul>
+    </nav>
+</header>
