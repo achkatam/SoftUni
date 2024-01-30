@@ -27,3 +27,11 @@ def index(request):
 
 def about(request):
     return render(request, "web/about.html")
+
+
+def visualize_bootstrap(request):
+    context = {
+        "has_bootstrap": request.GET.get("has_bootstrap", False),
+    }
+
+    return render(request, "web/bootstrap.html", context)

@@ -1,22 +1,26 @@
+{% load users_tag %}
 <header>
     <div>
-        <h1><a href="{% url 'index' %}">
+        <h1><a href="{% url "index" %}">
             {% if title %}
                 {{ title }}
             {% else %}
-                Angel's App
+                Angel"s App
             {% endif %}
         </a></h1>
-        {% if request.user.is_authenticated %}
-            {{ request.user }}
-        {% else %}
-            Anonymous
-        {% endif %}
+        {% profile_avatar %}
+        {#        {% if request.user.is_authenticated %}#}
+        {#            {{ request.user }}#}
+        {#        {% else %}#}
+        {#            Anonymous#}
+        {#        {% endif %}#}
     </div>
     <nav>
         <ul>
-            <li><a href="{% url 'index' %}">Index</a></li>
-            <li><a href="{% url 'about' %}">About</a></li>
+            <li><a href="{% url "index" %}">Index</a></li>
+            <li><a href="{% url "about" %}">About</a></li>
+            <li><a href="{% url "visualize_bootstrap" %}?has_bootstrap=1">With Bootstrap</a></li>
+            <li><a href="{% url "visualize_bootstrap" %}">Without Bootstrap</a></li>
         </ul>
     </nav>
 </header>
