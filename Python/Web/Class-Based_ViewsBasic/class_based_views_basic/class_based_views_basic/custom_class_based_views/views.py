@@ -4,9 +4,11 @@ from django.shortcuts import render
 
 class BaseView:
     @classmethod
-    def as_views(cls):
+    def as_view(cls):
         def view(request, *args, **kwargs):
             self = cls()
+
+            # dispatch logic
             if request.method == "GET":
                 return self.get(request, *args, **kwargs)
             else:

@@ -3,5 +3,5 @@ from class_based_views_basic.custom_class_based_views.views import index, IndexV
 
 urlpatterns = (
     path("", index, name="ccvc_index"),
-    path("cbv/", IndexView.as_views(), name="cbv_index"),
+    path("cbv/", IndexView.as_view(), name="cbv_index"),
 )
