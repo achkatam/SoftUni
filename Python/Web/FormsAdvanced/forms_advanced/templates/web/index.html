@@ -1,0 +1,53 @@
+{% load crispy_forms_tags %}
+{#  different styling and visualization #}
+<h1>Create form (raw)</h1>
+<form action="{% url 'create_person' %}" method="post">
+    {{ person_form }}
+    {% csrf_token %}
+
+    <button>Create</button>
+</form>
+
+<h1>Create form (as_p)</h1>
+<form action="{% url 'create_person' %}" method="post"
+enctype="multipart/form-data">
+    {{ person_form.as_p }}
+    {% csrf_token %}
+
+    <button>Create</button>
+</form>
+
+
+<h1>Create form (as_div)</h1>
+<form action="{% url 'create_person' %}" method="post">
+    {{ person_form.as_div }}
+    {% csrf_token %}
+
+    <button>Create</button>
+</form>
+
+<h1>Create form (as_table)</h1>
+<form action="{% url 'create_person' %}" method="post">
+    {{ person_form.as_table }}
+    {% csrf_token %}
+
+    <button>Create</button>
+</form>
+
+<h1>Create form (custom)</h1>
+<form action="{% url 'create_person' %}" method="post">
+    {% for field in person_form %}
+        {{ field }}
+    {% endfor %}
+    {% csrf_token %}
+
+    <button>Create</button>
+</form>
+
+<h1>Create form (crispy-form)</h1>
+{% crispy person_form %}
+
+{#<h1>Updated form</h1>#}
+{#<form action="">#}
+{#    {{ update_person_form.as_p }}#}
+{#</form>#}
