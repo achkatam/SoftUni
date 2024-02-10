@@ -3,6 +3,19 @@ from django.core.validators import MinLengthValidator
 
 
 # Create your models here.
+
+class Category(models.Model):
+    MIN_NAME_LENGTH = 3
+    MAX_NAME_LENGTH = 34
+    name = models.CharField(max_length=MAX_NAME_LENGTH,
+                            validators=
+                            (MinLengthValidator(MIN_NAME_LENGTH),
+                             ),
+                            null=False,
+                            blank=False,
+                            )
+
+
 class Todo(models.Model):
     MIN_TITLE_FIELD = 3
     MAX_TITLE_FIELD = 24
@@ -11,8 +24,8 @@ class Todo(models.Model):
                              validators=
                              (MinLengthValidator(MIN_TITLE_FIELD),
                               ),
-                             null=False,
-                             blank=False,
+                             null=True,
+                             blank=True,
                              )
 
     date_created = models.DateField(
@@ -20,6 +33,13 @@ class Todo(models.Model):
     )
 
     deadline = models.DateTimeField(
+        null=True,
+        blank=True,
+    )
+
+    category = models.ForeignKey(
+        Category,
+        on_delete=models.DO_NOTHING,
         null=True,
         blank=True,
     )

@@ -1,5 +1,5 @@
 from django.urls import path
-from class_based_views_basic.web.views import index, IndexRawView, IndexView, TodoCreateView,\
+from class_based_views_basic.web.views import index, IndexRawView, IndexView, TodoCreateView, \
     TodoDetailsView
 
 urlpatterns = (
@@ -12,4 +12,3 @@ urlpatterns = (
     path("todos/<int:pk>", TodoDetailsView.as_view(), name="todos_details"),
 
 )
-# TODO: add in github TODO view inheriting CreateFormView
