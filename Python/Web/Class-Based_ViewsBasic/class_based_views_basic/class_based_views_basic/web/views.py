@@ -3,6 +3,9 @@ from django.views import generic as views
 from datetime import datetime
 from django.shortcuts import render
 from django.http import HttpResponseNotAllowed
+from class_based_views_basic.web.models import Todo
+from class_based_views_basic.web.forms import TodoBaseForm
+from django.urls import reverse_lazy, reverse
 
 
 def perform_always():
@@ -72,4 +75,39 @@ class IndexView(views.TemplateView):
 
         context["dynamic_time"] = datetime.now()
 
+        context["todo_list"] = Todo.objects.all()
+
         return context
+
+
+class TodoCreateView(views.CreateView):
+    model = Todo
+    fields = "__all__"
+    template_name = "web/create_todo.html"
+
+    # Static way
+    # success_url = reverse_lazy("index")
+
+    # Dynamic way
+    def get_success_url(self):
+        return reverse("todos_details", kwargs={"pk": self.object.pk})
+
+    # Static way
+    # form_class = TodoBaseForm
+
+    # Dynamic way is used when you want to use if statements
+    def get_form_class(self):
+        # return TodoBaseForm
+        return super().get_form_class()
+
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class=form_class)
+
+        form.fields["deadline"].widget.attrs["type"] = "date"
+
+        return form
+
+
+class TodoDetailsView(views.DetailView):
+    model = Todo
+    template_name = "web/details_todo.html"

@@ -10,5 +10,12 @@
 <h2>{{ extra_context }}</h2>
 <h3>Static time: {{ static_time| time:"s" }}</h3>
 <h3>Dynamic time: {{ dynamic_time| time:"s" }}</h3>
+<ul>
+    {% for todo in todo_list %}
+    <li>
+        <strong>{{ todo.title }} - {{ todo.deadline }}</strong>
+    </li>
+    {% endfor %}
+</ul>
 </body>
 </html>
