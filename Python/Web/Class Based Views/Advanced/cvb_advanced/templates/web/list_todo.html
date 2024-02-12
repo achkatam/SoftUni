@@ -1,0 +1,46 @@
+{% extends "base.html" %} }
+
+{% block content %}
+    {#    {{ object_list }}#}
+    {#    <hr>#}
+    {#    {{ todo_list }}#}
+    {#    <hr>#}
+    {#    {{ title }}#}
+
+    <form action="{% url "todos_list" %}" method="get" autocomplete="off">
+        {{ filter_form }}
+
+        <button>Search</button>
+
+        {% csrf_token %}
+    </form>
+
+
+    <ul>
+        {% for todo in object_list %}
+            <li>
+                <a href="{% url "todos_detail" pk=todo.pk %}" >{{ todo.pk }} - {{ todo.title }}
+                - {{ todo.description }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <div class="pagination">
+<span class="step-links">
+{% if page_obj.has_previous %}
+    <a href="?page=1">&laquo; first</a>
+    <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+{% endif %}
+    <span class="current">
+        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+    </span>
+
+    {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">next</a>
+        <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+    {% endif %}
+</span>
+    </div>
+
+
+{% endblock %}
