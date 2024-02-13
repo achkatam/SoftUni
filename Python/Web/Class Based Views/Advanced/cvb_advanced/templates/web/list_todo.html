@@ -15,12 +15,18 @@
         {% csrf_token %}
     </form>
 
+    <select id="select_page_sizes">
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="20">20</option>
+    </select>
+
 
     <ul>
         {% for todo in object_list %}
             <li>
-                <a href="{% url "todos_detail" pk=todo.pk %}" >{{ todo.pk }} - {{ todo.title }}
-                - {{ todo.description }}</a>
+                <a href="{% url "todos_detail" pk=todo.pk %}">{{ todo.pk }} - {{ todo.title }}
+                    - {{ todo.description }}</a>
             </li>
         {% endfor %}
     </ul>
@@ -42,5 +48,45 @@
 </span>
     </div>
 
+
+{% endblock %}
+
+{% block scripts_body_end %}
+    <script>
+       const getQueryParams = (queryParamsString) => {
+            return queryParamsString
+                .split('&')
+                .map(pair => pair.split('='));
+        }
+
+        const buildQueryParamsString = (queryParams) => {
+            return queryParams
+                .map(([key, value]) => `${key}=${value}`)
+                .join('&');
+        }
+
+        var selectPageSizes = document.getElementById('select_page_sizes');
+        selectPageSizes.addEventListener('input', () => {
+            var paginateBy = selectPageSizes.value;
+            {# map(collection, func) in PY #}
+            {# collection.map(func) in JS #}
+            var queryParams = getQueryParams(window.location.search.substring(1))
+
+            var hasPaginateBy = false;
+            for (var i = 0; i < queryParams.length; i++) {
+                if (queryParams[i][0] === 'paginate_by') {
+                    queryParams[i][1] = paginateBy;
+                    hasPaginateBy = true;
+                }
+            }
+            if (!hasPaginateBy) {
+                queryParams.push(['paginate_by', paginateBy])
+            }
+
+            var queryParamsString = buildQueryParamsString(queryParams);
+
+            window.location = window.location.origin + window.location.pathname + "?" + queryParamsString;
+        });
+    </script>
 
 {% endblock %}

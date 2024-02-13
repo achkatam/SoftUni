@@ -1,6 +1,8 @@
 import json
 import random
 
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 from .models import Todo
 from django.shortcuts import render
 from django.http import HttpResponse
@@ -64,18 +66,36 @@ class DetailTodoView(views.DetailView):
 
         return queryset
 
+    def dispatch(self, request, *args, **kwargs):
+        # if request.user.tenant != request.GET.get('tenant'):
+        #     raise
+
+        return super().dispatch(request, *args, **kwargs)
+
+
+class LatestCreateMixin:
+    latest_created_count = 5
+
+    def get_queryset(self):
+        return super().get_queryset().order_by("-pk")[:self.latest_created_count]
+
+
+# class ListTodoView(LoginRequiredMixin,  LatestCreateMixin, views.ListView):
 
 class ListTodoView(views.ListView):
     model = Todo
+    # latest_created_count = 7
     # queryset = Todo.objects.all()
     template_name = "web/list_todo.html"
 
     # Static way for pagination
-    paginate_by = 3
+    paginate_by = 5
 
     # Dynamic way for pagination
-    # def get_paginate_by(self, queryset):
-    #     return random.randint(1, 14)
+    def get_paginate_by(self, queryset):
+        paginate_by = self.request.GET.get('paginate_by', self.paginate_by)
+
+        return paginate_by
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
