@@ -25,8 +25,7 @@
                         <p class="price">Price: ${{ album.price }}</p>
                     </div>
                     <div class="btn-group">
-                        {# TODO: Fix this link #}
-                        <a href="#">Details</a>
+                        <a href="{% url 'details_album' pk=album.pk %}">Details</a>
                     </div>
                 </div>
             </div>

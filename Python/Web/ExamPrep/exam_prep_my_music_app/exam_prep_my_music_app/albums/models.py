@@ -17,6 +17,7 @@ class Album(models.Model):
         unique=True,
         null=False,
         blank=False,
+        verbose_name="Album Name",
     )
 
     artist = models.CharField(
@@ -27,7 +28,7 @@ class Album(models.Model):
 
     genre = models.CharField(
         max_length=MAX_GENRE_LENGTH,
-        choices=[(tag.value, tag.name) for tag in MusicGenre],
+        choices=[(tag.value, tag.value) for tag in MusicGenre],
         null=False,
         blank=False,
     )
@@ -40,6 +41,7 @@ class Album(models.Model):
     image = models.URLField(
         null=False,
         blank=False,
+        verbose_name="Image URL",
     )
 
     price = models.FloatField(
@@ -47,7 +49,7 @@ class Album(models.Model):
         blank=False,
         validators=(
             MinValueValidator(MIN_PRICE),
-        )
+        ),
     )
 
     owner = models.ForeignKey(
@@ -56,12 +58,3 @@ class Album(models.Model):
         null=False,
         blank=False,
     )
-
-
-"""
-    Owner
-A foreign key to the Profile model.
-Establishes a many-to-one relationship with the Profile model, associating each album with a profile.
-The ON DELETE constraint must be configured to an appropriate value in alignment with the specified additional tasks.
-This field should remain hidden in forms.
-"""
