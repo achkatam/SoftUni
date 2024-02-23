@@ -1,38 +1,50 @@
-from django.shortcuts import render, redirect
+from django.views import generic as views
 
 from exam_prep_my_music_app.albums.models import Album
 from exam_prep_my_music_app.profiles.models import Profile
-from exam_prep_my_music_app.web.forms import CreateProfileForm
 
 
-def get_profile():
-    return Profile.objects.first()
+# Create your views here.
+class ProfileFormMixin:
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class)
+        form.fields["username"].widget.attrs["placeholder"] = "Username"
+        form.fields["email"].widget.attrs["placeholder"] = "Email"
+        form.fields["age"].widget.attrs["placeholder"] = "Age"
+
+        return form
 
 
-def create_profile(request):
-    form = CreateProfileForm(request.POST or None)
+class CreateProfileView(ProfileFormMixin, views.CreateView):
+    model = Profile
+    fields = ("username", "email", "age")
+    template_name = 'web/home-no-profile.html'  # Adjust the template name
+    success_url = '/'
 
-    if request.method == 'POST':
-        if form.is_valid():
-            profile = form.save()
-            return redirect('index')
+    def form_valid(self, form):
+        profile = form.save()
+        return super().form_valid(form)
 
-    context = {
-        "form": form,
-        "no_nav": True,
-    }
-
-    return render(request, "web/home-no-profile.html", context)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["no_nav"] = True
+        return context
 
 
-def index(request):
-    profile = get_profile()
+class IndexView(views.CreateView):
+    model = Profile
+    fields = ("username", "email", "age")
+    template_name = 'web/home-with-profile.html'  # Adjust the template name
+    success_url = '/'
 
-    if profile is None:
-        return create_profile(request)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["albums"] = Album.objects.all()
 
-    context = {
-        "albums": Album.objects.all(),
-    }
+        return context
 
-    return render(request, "web/home-with-profile.html", context)
+    def dispatch(self, request, *args, **kwargs):
+        profile = Profile.objects.first()
+        if not profile:
+            return CreateProfileView.as_view()(request, *args, **kwargs)
+        return super().dispatch(request, *args, **kwargs)
