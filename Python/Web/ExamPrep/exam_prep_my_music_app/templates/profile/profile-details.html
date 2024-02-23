@@ -1,60 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>My Music App</title>
-    <!-- Static Load -->
-    <link rel="stylesheet" href="/css/style.css" />
-  </head>
+{% extends "base.html" %}
 
-  <body>
-    <div id="box">
-      <!-- Navigation Bar -->
-      <header>
-        <nav>
-          <img src="/images/headphones.png" alt="headphones" />
-          <a href="#">Home</a>
-          <ul></ul>
-          <ul>
-            <!--Only for user with created profile-->
-            <li><a href="#">Create Album</a></li>
-            <li><a href="#">Profile</a></li>
-          </ul>
-        </nav>
-      </header>
-      <!-- End Navigation Bar -->
+{% block main_content %}
 
-      <!-- Main Content -->
-      <!--Details Page-->
-      <section id="detailsPage">
+
+    <section id="detailsPage">
         <div class="wrapper">
-          <div class="profilePage">
-            <img
-              src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
-              alt="Profile Image"
-            />
-          </div>
+            <div class="profilePage">
+                <img
+                        src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+                        alt="Profile Image"
+                />
+            </div>
 
-          <div class="profileText">
-            <!-- Profile Info -->
-            <h1>Username: testUser_12345</h1>
-            <h1>Email: testuser@email.com</h1>
-            <h1>Age: 27</h1>
-            <h1>Albums: 3</h1>
-          </div>
+            <div class="profileText">
+                <h1>Username: {{ object.username }}</h1>
+                <h1>Email: {{ object.email }}</h1>
+                {% if object.age %}
+                    <h1>Age: {{ object.age }}</h1>
+                {% endif %}
+                <h1>Albums: {{ object.album_set.count }}</h1>
+            </div>
 
-          <div class="actionBtn">
-            <!-- Button for Deleting the Profile -->
-            <a href="#" class="remove">Delete</a>
-          </div>
+            <div class="actionBtn">
+                <a href="{% url 'delete_profile' %}" class="remove">Delete</a>
+            </div>
         </div>
-      </section>
+    </section>
 
-      <!-- Footer -->
-      <footer>
-        <div>&copy;SoftUni Team 2024. All rights reserved.</div>
-      </footer>
-      <!-- End Footer -->
-    </div>
-  </body>
-</html>
+{% endblock %}

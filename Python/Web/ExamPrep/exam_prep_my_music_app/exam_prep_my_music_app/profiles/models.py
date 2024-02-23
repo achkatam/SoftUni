@@ -1,14 +1,7 @@
 from django.db import models
 from django.core.validators import MinLengthValidator
-from django.core.exceptions import ValidationError
 
-
-# TODO: Move to validators
-def validate_username(username):
-    is_valid = all(char.isalnum() or char == "_" for char in username)
-
-    if not is_valid:
-        raise ValidationError("Ensure this value contains only letters, numbers, and underscore.")
+from exam_prep_my_music_app.profiles.validators import validate_username
 
 
 # Create your models here.
@@ -20,6 +13,7 @@ class Profile(models.Model):
         max_length=MAX_USERNAME_LENGTH,
         validators=(
             MinLengthValidator(MIN_USERNAME_LENGTH),
+            validate_username,
         ),
         null=False,
         blank=False,

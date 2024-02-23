@@ -19,6 +19,7 @@ def create_profile(request):
 
     context = {
         "form": form,
+        "no_nav": True,
     }
 
     return render(request, "web/home-no-profile.html", context)

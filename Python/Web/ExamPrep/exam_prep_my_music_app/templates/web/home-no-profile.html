@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 
+{% load static %}
+
 {% block main_content %}
-    <!-- Main Content -->
-    <!--Home Page-->
     <div class="container-inline">
         <section id="welcomePage">
             <div id="welcome-message">
@@ -10,7 +10,7 @@
                 <h1>My Music App!</h1>
             </div>
             <div class="music-img">
-                <img src="static/images/musicIcons.webp" alt="music-icon"/>
+                <img src="{% static "images/musicIcons.webp" %}" alt="music-icon"/>
             </div>
         </section>
 
