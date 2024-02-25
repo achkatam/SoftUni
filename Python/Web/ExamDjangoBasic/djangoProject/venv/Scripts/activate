@@ -45,7 +45,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV='C:\Users\agmat\PycharmProjects\pythonProject\djangoProject\venv'
+VIRTUAL_ENV='C:\Users\agmat\PycharmProjects\SoftUniPython\Web\Django Basic\ExamDjangoBasic\djangoProject\venv'
 if ([ "$OSTYPE" = "cygwin" ] || [ "$OSTYPE" = "msys" ]) && $(command -v cygpath &> /dev/null) ; then
     VIRTUAL_ENV=$(cygpath -u "$VIRTUAL_ENV")
 fi

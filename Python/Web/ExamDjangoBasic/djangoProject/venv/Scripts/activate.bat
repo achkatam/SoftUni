@@ -1,4 +1,4 @@
-@set "VIRTUAL_ENV=C:\Users\agmat\PycharmProjects\pythonProject\djangoProject\venv"
+@set "VIRTUAL_ENV=C:\Users\agmat\PycharmProjects\SoftUniPython\Web\Django Basic\ExamDjangoBasic\djangoProject\venv"
 
 @set "VIRTUAL_ENV_PROMPT="
 @if NOT DEFINED VIRTUAL_ENV_PROMPT (

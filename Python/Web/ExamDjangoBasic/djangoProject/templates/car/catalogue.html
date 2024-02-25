@@ -3,29 +3,29 @@
 {% block main_content %}
 
     {% if cars.count <= 0 %}
-        <!-- Display a paragraph: If there are no cars yet-->
+
         <p class="no-articles">No cars yet</p>
     {% else %}
-        <!-- Display a card with information about each car (if any)-->
+
 
         <section id="catalogue">
             <h1>Total cars: {{ cars.count }}</h1>
             {% for car in cars %}
-                <!-- first car-->
+
                 <div class="car-card">
                     <div class="image-wrap">
-                        <!-- car image -->
+
                         <img
                                 src="{{ car.image_url }}"
                                 alt="{{ car.name }}"
                         />
                     </div>
-                    <!-- car type -->
+
                     <h3>{{ car.type }}</h3>
-                    <!-- car model -->
+
                     <h1>{{ car.model }}</h1>
                     <div class="details-buttons">
-                        <!-- car details button -->
+
                         <a href="{% url 'details_car' pk=car.pk %}" class="details-btn">Details</a>
                     </div>
                 </div>

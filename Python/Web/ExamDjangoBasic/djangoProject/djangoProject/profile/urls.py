@@ -7,8 +7,3 @@ urlpatterns = [
     path("edit/", EditProfileView.as_view(), name="edit_profile"),
     path("delete/", DeleteProfileView.as_view(), name="delete_profile"),
 ]
-
-"""
- - Profile create page · http://localhost:8000/profile/details/ 
- - Profile details page · http://localhost:8000/profile/edit/ -
-  Profile edit page · http://localhost:8000/profile/delete/ - Profile delete page"""

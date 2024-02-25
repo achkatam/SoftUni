@@ -6,16 +6,16 @@
 
         <div class="container">
             <h1>Are you sure you want to delete your profile?</h1>
-            <!-- Delete Profile Form -->
+
             <form id='delete' action="{% url 'delete_profile' %}" method="post">
                 {{ form.as_p }}
                 {% csrf_token %}
-                <!-- Confirm Button -->
+
                 <input class="btn submit" type="submit" value="Yes">
 
             </form>
         </div>
-        <!-- End Delete Profile Form -->
+
     </section>
 
 {% endblock %}

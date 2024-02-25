@@ -4,7 +4,6 @@ from django.db import models
 from djangoProject.profile.validators import validate_username
 
 
-# Create your models here.
 class Profile(models.Model):
     MAX_USERNAME_LENGTH = 15
     MIN_USERNAME_LENGTH = 3

@@ -32,7 +32,7 @@ export-env {
       }
     }
 
-    let virtual_env = 'C:\Users\agmat\PycharmProjects\pythonProject\djangoProject\venv'
+    let virtual_env = 'C:\Users\agmat\PycharmProjects\SoftUniPython\Web\Django Basic\ExamDjangoBasic\djangoProject\venv'
     let bin = 'Scripts'
 
     let is_windows = ($nu.os-info.family) == 'windows'

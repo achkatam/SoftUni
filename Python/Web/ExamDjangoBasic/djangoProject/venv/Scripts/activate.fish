@@ -58,7 +58,7 @@ end
 # Unset irrelevant variables.
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV 'C:\Users\agmat\PycharmProjects\pythonProject\djangoProject\venv'
+set -gx VIRTUAL_ENV 'C:\Users\agmat\PycharmProjects\SoftUniPython\Web\Django Basic\ExamDjangoBasic\djangoProject\venv'
 
 # https://github.com/fish-shell/fish-shell/issues/436 altered PATH handling
 if test (echo $FISH_VERSION | head -c 1) -lt 3

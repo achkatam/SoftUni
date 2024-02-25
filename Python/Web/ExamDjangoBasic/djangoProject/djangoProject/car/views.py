@@ -55,7 +55,8 @@ class DeleteCarView(ReadonlyViewMixin, views.DeleteView):
     queryset = Car.objects.all()
     template_name = "car/car-delete.html"
     success_url = reverse_lazy("catalogue")
-    form_class = modelform_factory(Car, fields=("type", "model", "year", "image_url", "price"))
+    form_class = modelform_factory(Car,
+                                   fields=("type", "model", "year", "image_url", "price"))
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()

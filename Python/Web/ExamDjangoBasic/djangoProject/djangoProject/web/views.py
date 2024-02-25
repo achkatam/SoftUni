@@ -26,8 +26,7 @@ class IndexView(views.TemplateView):
 # Create your views here.
 class CreateProfileView(views.CreateView):
     model = Profile
-    # fields = ("username", "email", "age", "password")
-    form_class = ProfileWebForm
+    form_class = ProfileWebForm  # or fields
     template_name = "profile/profile-create.html"
     success_url = reverse_lazy("index")
 
