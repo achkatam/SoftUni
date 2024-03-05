@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block main_content %}
+
+    <!-- Main Content -->
+    <!-- Catalog with Albums-->
+    <section id="catalogPage">
+        {% if albums %}
+            <h1>All Albums</h1>
+        {% else %}
+            <!--  If No albums in catalog -->
+            <p>No Albums in Catalog!</p>
+        {% endif %}
+        {% for album in albums %}
+            <!-- If albums in catalog -->
+            <!-- First Card-Box in catalog -->
+            <div class="card-box">
+                <img src="{{ album.image }}" alt="{{ album.description }}"/>
+                <div>
+                    <div class="text-center">
+                        <p class="name">Name: {{ album.name }}</p>
+                        <p class="artist">Artist: {{ album.artist }}</p>
+                        <p class="genre">Genre: {{ album.genre }}</p>
+                        <p class="price">Price: ${{ album.price }}</p>
+                    </div>
+                    <div class="btn-group">
+                        <a href="{% url 'details_album' pk=album.pk %}">Details</a>
+                    </div>
+                </div>
+            </div>
+            <!-- End First Card-Box in catalog -->
+
+
+
+
+        {% endfor %}
+
+        <!-- End Third Card-Box in catalog -->
+    </section>
+{% endblock %}

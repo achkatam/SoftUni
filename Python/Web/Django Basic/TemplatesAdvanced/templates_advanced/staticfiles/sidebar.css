@@ -1,0 +1,8 @@
+.root {
+    display: flex;
+    flex: 1;
+}
+
+.root .left {
+    background-color: grey;
+}
