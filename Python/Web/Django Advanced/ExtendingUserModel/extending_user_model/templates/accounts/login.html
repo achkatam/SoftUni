@@ -1,8 +1,0 @@
-<form action="{% url 'login_user' %}?next={{ next }}" method="post">
-    {{ form.as_p }}
-    
-    <button>Login</button>
-    or <a href="#">Register</a>
-    
-    {% csrf_token %}
-</form>
