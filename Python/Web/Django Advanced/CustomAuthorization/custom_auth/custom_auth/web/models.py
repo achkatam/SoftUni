@@ -1,5 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 from custom_auth.accounts.models import Profile
 
@@ -29,3 +31,8 @@ class Model1(AuditModel, models.Model):
     #     on_delete=models.DO_NOTHING,
     # )
     # Example: request.user.profile.model1_set()
+
+
+@receiver(post_save, sender=Model1)
+def model1_created(sender, instance, created, *args, **kwargs):
+    print(sender, instance, created, args, kwargs)
