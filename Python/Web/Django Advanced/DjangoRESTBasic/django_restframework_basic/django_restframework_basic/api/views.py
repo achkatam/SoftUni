@@ -1,11 +1,15 @@
+import time
+
 from django.shortcuts import render, redirect
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 from django_restframework_basic.api.models import Book
 
+from rest_framework import status
 from django.views import generic as views
-from rest_framework import views as api_views, status
+from rest_framework import views as api_views
+from rest_framework import generics as api_generic_views
 
 from .serializers import BookSerializer
 
@@ -56,8 +60,12 @@ class BookListView(views.View):
         return render(request, template_name="", context=None)
 
 
-class BookListApiView(api_views.APIView):
+class BookListApiView( api_views.APIView):
+    # queryset = Book.objects.all()
+    # serializer_class = BookSerializer
+
     def get(self, request):
+        time.sleep(1)
         book_list = Book.objects.all()
 
         serializer = BookSerializer(book_list, many=True)
@@ -73,7 +81,10 @@ class BookListApiView(api_views.APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
-class BookUpdateApiView(api_views.APIView):
+class BookUpdateApiView(api_generic_views.UpdateAPIView, api_views.APIView):
+    # queryset = Book.objects.all()
+    serializer_class = BookSerializer
+
     def get_object(self, pk):
         return Book.objects \
             .filter(pk=pk) \
