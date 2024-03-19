@@ -1,6 +1,0 @@
-<h1>Model Form</h1>
-<form action="{% url 'update_employee' id=employee.id %}" method="post">
-    {{ form.as_p }}
-    <button>Update</button>
-    {% csrf_token %}
-</form>
